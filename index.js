@@ -10,48 +10,56 @@ const colors = {
   whiteBold: "\x1b[97;1m",
   dim: "\x1b[0;2m",
   green: "\x1b[92m",
+  yellow: "\x1b[33m",
   red: "\x1b[91m",
+  blue: "\x1b[94m",
+  magenta: "\x1b[95m",
+  cyan: "\x1b[96m",
   reset: "\x1b[0m",
 };
 
 async function changeCommitDate(sha, date, { committerDate, authorDate }) {
-  const spinner = ora();
   let cmd = committerDate ? `export GIT_AUTHOR_DATE="${date}"` : "";
-  let datesChanged = authorDate ? "author" : "";
-
   if (authorDate) cmd += `\nexport GIT_COMMITTER_DATE="${date}"`;
-  if (committerDate)
-    datesChanged += datesChanged ? " & committer" : "committer";
-
-  const shortSha = sha.slice(0, 7);
-  spinner.start(
-    `${color("rewriting commit", "white")} ${color(
-      shortSha,
-      "dim"
-    )} ${datesChanged} date to ${color(date, "dim")}`
-  );
+  
   const script = `git filter-branch -f --env-filter \
         'if [ $GIT_COMMIT = ${sha} ]
          then
              ${cmd}
          fi'`;
   await execute(script);
-  spinner.succeed();
+
 }
 
 async function changeCommitDates(list, argv) {
-  const { subject, value } = argv;
+  const { subject, value, committerDate, authorDate } = argv;
   for (const sha of list) {
-    const { stdout } = await execute(
-      `git show --no-patch --no-notes --pretty='%cd' ${sha}`
-    );
+    const { stdout } = await execute(`git show --no-patch --no-notes --pretty='%cd' ${sha}`);
+    let datesChanged = authorDate ? "author" : "";
+    if (committerDate) datesChanged += datesChanged ? " & committer" : "committer";
     let date = stdout.trim();
 
+    const spinner = ora();
+    const shortSha = sha.slice(0, 7);
+
+    spinner.start(
+      `${color("rewriting", "white")} ${color(
+        shortSha,
+        "blue"
+      )} ${color(`${datesChanged} date to`, 'dim')} ${color(date, "magenta")}`
+    );
+    
     if (date.includes(subject)) {
       date = date.replace(subject, value);
+    } else {
+      const sub = color(subject, 'dim')
+      const timestamp = color(date, 'dim')
+      spinner.warn(sub + color(' not found in ', 'yellow') + timestamp + color(' for commit ', 'yellow') + color(sha, 'dim'))
+      continue;
     }
 
     await changeCommitDate(sha, date, argv);
+    spinner.succeed();
   }
 }
 
@@ -97,7 +105,11 @@ yargs
         ]);
         for (commit of commits) {
           const formattedCommit = commit.split("  ");
-          t.push([formattedCommit[0], formattedCommit[1], formattedCommit[2]]);
+          t.push([
+            color(formattedCommit[0], "blue"),
+            color(formattedCommit[1], "cyan"),
+            color(formattedCommit[2], "magenta"),
+          ]);
         }
         console.log(t.toString());
       } catch (error) {
@@ -105,20 +117,25 @@ yargs
       }
     }
   )
-  .command("redate <subject> <value>", "rewrite commit dates", {}, async (argv) => {
-    try {
-      const commits = argv.sha ? [argv.sha] : await listCommits();
-      await changeCommitDates(commits, argv);
-      console.log(
-        color("successfully rewrote ", "green") +
-          color(commits.length, "whiteBold") +
-          color(" commits", "green")
-      );
-    } catch (error) {
-      throw color(error.message, "red");
+  .command(
+    "redate <subject> <value>",
+    "rewrite commit dates",
+    {},
+    async (argv) => {
+      try {
+        const commits = argv.sha ? [argv.sha] : await listCommits();
+        await changeCommitDates(commits, argv);
+        console.log(
+          color("restory done for ", "green") +
+            color(commits.length, "whiteBold") +
+            color(" commits", "green")
+        );
+      } catch (error) {
+        throw color(error.message, "red");
+      }
     }
-  })
-  
+  )
+
   .options("all", {
     alias: "a",
     type: "boolean",
