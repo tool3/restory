@@ -70,19 +70,6 @@ async function listCommits(withMessage = false) {
 
 yargs
   .config({})
-  .command("$0 <subject> <value>", "rewrite commit dates", {}, async (argv) => {
-    try {
-      const commits = argv.sha ? [argv.sha] : await listCommits();
-      await changeCommitDates(commits, argv);
-      console.log(
-        color("successfully rewrote ", "green") +
-          color(commits.length, "whiteBold") +
-          color(" commits", "green")
-      );
-    } catch (error) {
-      throw color(error.message, "red");
-    }
-  })
   .command(
     ["list", "ls"],
     "list all commits",
@@ -118,6 +105,20 @@ yargs
       }
     }
   )
+  .command("redate <subject> <value>", "rewrite commit dates", {}, async (argv) => {
+    try {
+      const commits = argv.sha ? [argv.sha] : await listCommits();
+      await changeCommitDates(commits, argv);
+      console.log(
+        color("successfully rewrote ", "green") +
+          color(commits.length, "whiteBold") +
+          color(" commits", "green")
+      );
+    } catch (error) {
+      throw color(error.message, "red");
+    }
+  })
+  
   .options("all", {
     alias: "a",
     type: "boolean",
@@ -141,5 +142,6 @@ yargs
     default: true,
     description: "change committer date",
   })
+  .demandCommand(1)
   .help()
   .wrap(90).argv;
