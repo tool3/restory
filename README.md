@@ -19,10 +19,13 @@ output:
 ![](./list.png)
 
 ## `redate`
-rewrite commit|s date
-
+rewrite commit|s date   
+### usage
+```bash
+restory redate <string-to-replace> <value>
+```
 ### examples
-- rewrite all commits to year to 1987   
+- rewrite all commits that has `2021` to year to `1987`   
 ```bash
 restory redate 2021 1987
 ```
@@ -37,6 +40,10 @@ restory redate 'Sat Jan 23' 'Sun Jan 24' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6
 ## `reauthor`
 rewrite commit|s author name
 
+### usage
+```bash
+restory reauthor <author-name>
+```
 ### example
 rewrite all commit author names to The Devil
 ```bash
@@ -46,6 +53,11 @@ restory reauthor 'The Devil'
 ## `remail`
 rewrite commit|s author email
 
+### usage
+```bash
+restory remail <author-email>
+```
+
 ### example
 rewrite all commit author email to 'thedevil@666.com'
 ```bash
@@ -53,8 +65,8 @@ restory remail 'thedevil@666.com'
 ```
 
 # important usage notes
-⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️   
-⚠️ use at your own risk ⚠️   
+⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️    
+use at your own risk
 
 things to know:
 - every `restory` command recreates the commit|s shas
