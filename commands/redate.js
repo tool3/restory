@@ -2,9 +2,9 @@ const { color, command } = require("../utils");
 const { listCommits } = require("./list");
 
 async function redate(argv) {
-  const {sha, comitterDate, authorDate, subject, value} = argv;
+  const {sha, committerDate, authorDate, subject, value} = argv;
   const commits = sha ? [sha] : await listCommits(argv);
-  const gitCmd = (comitterDate && authorDate) ? ['export GIT_AUTHOR_DATE', 'export GIT_COMMITTER_DATE'] : ['export GIT_COMMITTER_DATE'];
+  const gitCmd = (committerDate && authorDate) ? ['export GIT_AUTHOR_DATE', 'export GIT_COMMITTER_DATE'] : ['export GIT_COMMITTER_DATE'];
   await command({
     value,
     subject,
