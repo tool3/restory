@@ -1,7 +1,7 @@
 {
-  "name": "restory",
+  "name": "@tool3/restory",
   "version": "1.0.0",
-  "description": "",
+  "description": "rewrite git history",
   "main": "index.js",
   "bin": {
     "restory": "index.js"
@@ -9,9 +9,13 @@
   "scripts": {
     "test": "echo 'no tests'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cli",
+    "git",
+    "commits"
+  ],
+  "author": "Tal Hayut",
+  "license": "MIT",
   "dependencies": {
     "cli-table3": "^0.6.0",
     "ora": "^5.3.0",
