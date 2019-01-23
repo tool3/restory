@@ -20,7 +20,7 @@ output:
 
 ## `redate`
 rewrite commit|s date   
-alias `rd`
+alias `rd`   
 ### usage
 ```bash
 restory redate <string-to-replace> <value>
@@ -86,4 +86,4 @@ things to know:
 - every `restory` command recreates the commit|s shas
 - rewriting history takes a while! I added a spinner and what commit it's currently processing but still it takes time, let it run, and validate the results with `restory ls` when it's done.
 - you will have to force push
-- when run without `--sha || -s` flag - the command will rewrite ALL commits to given input
+- when run without `--sha || -s` flag - the command will rewrite ALL commits with given input
