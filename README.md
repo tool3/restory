@@ -54,9 +54,9 @@ restory remail 'thedevil@666.com'
 
 # important usage notes
 ⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️   
-use at your own caution.
+⚠️ use at your own risk ⚠️   
 
-things you should know:
-- every `restory` command entails in recreation of commit|s shas
-- you will have to force push
+things to know:
+- every `restory` command recreates the commit|s shas
 - rewriting history takes a while! I added a spinner and what commit it's currently processing but still it takes time, let it run, and validate the results with `restory ls` when it's done.
+- you will have to force push
