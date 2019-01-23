@@ -11,6 +11,7 @@ const colors = {
   blue: "\x1b[94m",
   magenta: "\x1b[95m",
   cyan: "\x1b[96m",
+  underline: "\x1b[0;4m",
   reset: "\x1b[0m",
 };
 
@@ -49,7 +50,7 @@ async function command({
         cmd = `${gitCmd}="${input}"`;
     }
     spinner.start(
-      `${color("rewriting", "white")} ${color(shortSha, "blue")} ${name} ${color(`${entity}`, "dim")} to ${color(value, "magenta")}`
+      `${color("rewriting", "white")} ${color(shortSha, "blue")} ${color(name, "white")} ${color(`${entity.replace(subject, `${colors.underline}${subject}${colors.dim}`)}`, "dim")} ${color('to', "white")} ${color(value, "magenta")}`
     );
 
     await filterBranch(sha, cmd);
