@@ -1,14 +1,14 @@
 const { color, command } = require("../utils");
 const { listCommits } = require("./list");
 
-async function reauthor(argv) {
-    const { sha, value } = argv;
+async function remail(argv) {
+  const { sha, value } = argv;
   const commits = sha ? [sha] : await listCommits(argv);
   await command({
     value,
-    script: "git show --no-patch --no-notes --pretty='%an'",
-    name: "author",
-    gitCmd: `export GIT_AUTHOR_NAME`,
+    script: "git show --no-patch --no-notes --pretty='%ae'",
+    name: "email",
+    gitCmd: `export GIT_AUTHOR_EMAIL`,
     commits
   });
   console.log(
@@ -18,4 +18,4 @@ async function reauthor(argv) {
   );
 }
 
-module.exports = reauthor;
+module.exports = remail;

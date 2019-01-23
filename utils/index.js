@@ -27,21 +27,33 @@ async function filterBranch(sha, cmd) {
   await execute(script);
 }
 
-async function command({ value, script, name, gitCmd, commits }) {
+async function command({
+  subject,
+  value,
+  script,
+  name,
+  gitCmd,
+  commits,
+  replace = false,
+}) {
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`);
-    const subject = stdout.trim();
+    const entity = stdout.trim();
     const spinner = ora();
     const shortSha = sha.slice(0, 7);
-
+    const input = replace ? entity.replace(subject, value) : value;
+    let cmd = '';
+    if (Array.isArray(gitCmd)) {
+        cmd = gitCmd.map(c => `${c}="${input}"`).join('\n');
+    } else {
+        cmd = `${gitCmd}="${input}"`;
+    }
+    console.log(cmd)
     spinner.start(
-      `${color("rewriting", "white")} ${color(shortSha, "blue")} ${color(
-        `${name} ${subject} to `,
-        "dim"
-      )} ${color(value, "magenta")}`
+      `${color("rewriting", "white")} ${color(shortSha, "blue")} ${name} ${color(`${entity}`, "dim")} to ${color(value, "magenta")}`
     );
 
-    await filterBranch(sha, gitCmd);
+    await filterBranch(sha, cmd);
     spinner.succeed();
   }
 }

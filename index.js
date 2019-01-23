@@ -5,6 +5,7 @@ const { color } = require('./utils');
 const { list } = require("./commands/list");
 const redate = require("./commands/redate");
 const reauthor = require("./commands/reauthor");
+const remail = require("./commands/remail");
 
 yargs
   .config({})
@@ -52,7 +53,7 @@ yargs
   )
   .command(
     "reauthor <value>",
-    "rewrite author",
+    "rewrite author name",
     {
       script: {
         description: "list commit script",
@@ -63,6 +64,24 @@ yargs
     async (argv) => {
       try {
         await reauthor(argv);
+      } catch (error) {
+        throw color(error.message, "red");
+      }
+    }
+  )
+  .command(
+    "remail <value>",
+    "rewrite author email",
+    {
+      script: {
+        description: "list commit script",
+        type: "string",
+        default: "git log --format=format:%H",
+      },
+    },
+    async (argv) => {
+      try {
+        await remail(argv);
       } catch (error) {
         throw color(error.message, "red");
       }
