@@ -1,4 +1,4 @@
-const { color, execute, filterBranch } = require("../utils");
+const { color, execute, filterBranch, command } = require("../utils");
 const {listCommits} = require('./list');
 const ora = require("ora");
 
@@ -56,6 +56,7 @@ async function redate(argv) {
     ? [argv.sha]
     : await listCommits(argv);
   await changeCommitDates(commits, argv);
+  //await command({argv, name: 'date', 'GIT_AUTHOR_DATE'})
   console.log(
     color("restory done for ", "green") +
       color(commits.length, "whiteBold") +

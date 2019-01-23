@@ -39,7 +39,7 @@ yargs
       script: {
         description: "list commit script",
         type: "string",
-        default: "git log --format=format:%H master",
+        default: "git log --format=format:%H",
       },
     },
     async (argv) => {
@@ -57,7 +57,7 @@ yargs
       script: {
         description: "list commit script",
         type: "string",
-        default: "git log --format=format:%H master",
+        default: "git log --format=format:%H",
       },
     },
     async (argv) => {
