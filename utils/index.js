@@ -48,7 +48,6 @@ async function command({
     } else {
         cmd = `${gitCmd}="${input}"`;
     }
-    console.log(cmd)
     spinner.start(
       `${color("rewriting", "white")} ${color(shortSha, "blue")} ${name} ${color(`${entity}`, "dim")} to ${color(value, "magenta")}`
     );
