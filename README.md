@@ -53,7 +53,7 @@ restory remail 'thedevil@666.com'
 ```
 
 # important usage notes
-ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY!
+⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️   
 use at your own caution.
 
 things you should know:
