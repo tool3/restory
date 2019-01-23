@@ -23,7 +23,7 @@ async function filterBranch(sha, cmd) {
   const script = `git filter-branch -f --env-filter \
     'if [ $GIT_COMMIT = ${sha} ]
      then
-         $1 = ${cmd}
+        ${cmd}
      fi'`;
   await execute(script, { maxBuffer: 100000 * 100000 });
 }
@@ -47,7 +47,7 @@ async function command({
     const shortSha = sha.slice(0, 7);
     const input = replace ? entity.replace(subject, value) : value;
     let cmd = '';
-    if (cmd) {
+    if (gitCmd) {
       if (Array.isArray(gitCmd)) {
         cmd = gitCmd.map((c) => `${c}="${input}"`).join('\n');
       } else {
