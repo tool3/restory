@@ -7,9 +7,9 @@ yarn add @tool3/restory
 ```
 
 # api
-## `ls`
-show all commits
-
+## `list`
+list all commits
+alias `ls`   
 ### example
 ```bash
 restory ls
@@ -20,6 +20,7 @@ output:
 
 ## `redate`
 rewrite commit|s date   
+alias `rd`
 ### usage
 ```bash
 restory redate <string-to-replace> <value>
@@ -38,7 +39,8 @@ restory redate 'Sat Jan 23' 'Sun Jan 24' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6
 ```
 
 ## `reauthor`
-rewrite commit|s author name
+rewrite commit|s author name   
+alias `ra`
 
 ### usage
 ```bash
@@ -51,7 +53,8 @@ restory reauthor 'The Devil'
 ```
 
 ## `remail`
-rewrite commit|s author email
+rewrite commit|s author email   
+alias `re`
 
 ### usage
 ```bash
