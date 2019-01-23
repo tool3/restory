@@ -6,6 +6,7 @@ const { list } = require('./commands/list');
 const redate = require('./commands/redate');
 const reauthor = require('./commands/reauthor');
 const remail = require('./commands/remail');
+const remsg = require('./commands/remsg');
 
 function logo() {
   const string = `
@@ -30,7 +31,7 @@ yargs
       compact: {
         alias: 'c',
         description: 'show compact table',
-        type: 'boolean',
+        type: 'boolean',  
         default: true,
       },
       script: {
@@ -96,6 +97,24 @@ yargs
     async (argv) => {
       try {
         await remail(argv);
+      } catch (error) {
+        throw color(error.message, 'red');
+      }
+    }
+  )
+  .command(
+    ['remsg <value>', 'rm'],
+    'rewrite commit msg',
+    {
+      script: {
+        description: 'list commit script',
+        type: 'string',
+        default: 'git log --format=format:%H',
+      },
+    },
+    async (argv) => {
+      try {
+        await remsg(argv);
       } catch (error) {
         throw color(error.message, 'red');
       }

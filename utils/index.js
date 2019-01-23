@@ -23,12 +23,13 @@ async function filterBranch(sha, cmd) {
   const script = `git filter-branch -f --env-filter \
     'if [ $GIT_COMMIT = ${sha} ]
      then
-         ${cmd}
+         $1 = ${cmd}
      fi'`;
   await execute(script, { maxBuffer: 100000 * 100000 });
 }
 
 async function command({
+  filter = filterBranch,
   subject,
   value,
   script,
@@ -42,15 +43,18 @@ async function command({
       maxBuffer: 100000 * 100000,
     });
     const entity = stdout.trim();
-    const spinner = ora({indent: 2});
+    const spinner = ora({ indent: 2 });
     const shortSha = sha.slice(0, 7);
     const input = replace ? entity.replace(subject, value) : value;
     let cmd = '';
-    if (Array.isArray(gitCmd)) {
-      cmd = gitCmd.map((c) => `${c}="${input}"`).join('\n');
-    } else {
-      cmd = `${gitCmd}="${input}"`;
+    if (cmd) {
+      if (Array.isArray(gitCmd)) {
+        cmd = gitCmd.map((c) => `${c}="${input}"`).join('\n');
+      } else {
+        cmd = `${gitCmd}="${input}"`;
+      }
     }
+
     spinner.start(
       `${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${color(
         name,
@@ -64,7 +68,7 @@ async function command({
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
 
-    await filterBranch(sha, cmd);
+    await filter(sha, cmd || value);
     spinner.succeed();
   }
 }

@@ -66,7 +66,18 @@ rewrite all commit author email to 'thedevil@666.com'
 ```bash
 restory remail 'thedevil@666.com'
 ```
-
+## `remsg`
+rewrite commit|s message   
+alias `rm` 
+### usage
+```bash
+restory remsg <commit-msg>
+```
+### example
+rewrite specific commit message
+```bash
+restory remsg 'this is the new commit msg' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6d29aa'
+```
 # important usage notes
 ⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️    
 use at your own risk
@@ -75,3 +86,4 @@ things to know:
 - every `restory` command recreates the commit|s shas
 - rewriting history takes a while! I added a spinner and what commit it's currently processing but still it takes time, let it run, and validate the results with `restory ls` when it's done.
 - you will have to force push
+- when run without `--sha || -s` flag - the command will rewrite ALL commits to given input
