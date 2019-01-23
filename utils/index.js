@@ -24,7 +24,7 @@ async function filterBranch(sha, cmd) {
      then
          ${cmd}
      fi'`;
-  await execute(script);
+  await execute(script, {maxBuffer: 100000 * 100000});
 }
 
 async function command({
@@ -37,7 +37,7 @@ async function command({
   replace = false,
 }) {
   for (const sha of commits) {
-    const { stdout } = await execute(`${script} ${sha}`);
+    const { stdout } = await execute(`${script} ${sha}`, {maxBuffer: 100000 * 100000});
     const entity = stdout.trim();
     const spinner = ora();
     const shortSha = sha.slice(0, 7);

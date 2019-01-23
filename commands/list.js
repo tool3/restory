@@ -2,7 +2,7 @@ const table = require("cli-table3");
 const { color, execute } = require("../utils");
 
 async function listCommits({ script }) {
-  const { stdout } = await execute(script);
+  const { stdout } = await execute(script, {maxBuffer: 10000 * 10000});
   return stdout.trim().split("\n");
 }
 

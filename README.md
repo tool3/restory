@@ -59,3 +59,4 @@ use at your own caution.
 things you should know:
 - every `restory` command entails in recreation of commit|s shas
 - you will have to force push
+- rewriting history takes a while! I added a spinner and what commit it's currently processing but still it takes time, let it run, and validate the results with `restory ls` when it's done.
