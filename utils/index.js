@@ -42,7 +42,7 @@ async function command({
       maxBuffer: 100000 * 100000,
     });
     const entity = stdout.trim();
-    const spinner = ora();
+    const spinner = ora({indent: 2});
     const shortSha = sha.slice(0, 7);
     const input = replace ? entity.replace(subject, value) : value;
     let cmd = '';
