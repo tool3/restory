@@ -24,6 +24,7 @@ async function list(argv) {
     { content: color("MSG", "whiteBold"), hAlign: "center" },
     { content: color("DATE", "whiteBold"), hAlign: "center" },
     { content: color("AUTHOR", "whiteBold"), hAlign: "center" },
+    { content: color('EMAIL', 'whiteBold'), hAlign: 'center'}
   ]);
   for (commit of commits) {
     const formattedCommit = commit.split("  ");
@@ -32,6 +33,7 @@ async function list(argv) {
       color(formattedCommit[1], "cyan"),
       color(formattedCommit[2], "magenta"),
       color(formattedCommit[3], "yellow"),
+      color(formattedCommit[4], 'green')
     ]);
   }
   console.log(t.toString());

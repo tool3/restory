@@ -21,7 +21,7 @@ yargs
       script: {
         description: "list commit script",
         type: "string",
-        default: "git log --pretty=oneline --format='%H  %s  %cd  %an'",
+        default: "git log --pretty=oneline --format='%H  %s  %cd  %an  %ae'",
       },
     },
     async (argv) => {
