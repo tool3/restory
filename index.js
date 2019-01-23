@@ -123,7 +123,7 @@ yargs
   .options('all', {
     alias: 'a',
     type: 'boolean',
-    default: false,
+    default: true,
     description: 'rewrite all commits',
   })
   .options('sha', {
