@@ -1,6 +1,6 @@
 {
   "name": "@tool3/restory",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "rewrite git history",
   "main": "index.js",
   "bin": {
