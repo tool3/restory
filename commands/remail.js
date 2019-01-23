@@ -1,5 +1,5 @@
-const { color, command } = require("../utils");
-const { listCommits } = require("./list");
+const { color, command } = require('../utils');
+const { listCommits } = require('./list');
 
 async function remail(argv) {
   const { sha, value } = argv;
@@ -7,14 +7,14 @@ async function remail(argv) {
   await command({
     value,
     script: "git show --no-patch --no-notes --pretty='%ae'",
-    name: "email",
+    name: 'email',
     gitCmd: `export GIT_AUTHOR_EMAIL`,
-    commits
+    commits,
   });
   console.log(
-    color("restory done for ", "green") +
-      color(commits.length, "whiteBold") +
-      color(" commits", "green")
+    color('restory done for ', 'green') +
+      color(commits.length, 'whiteBold') +
+      color(' commits', 'green')
   );
 }
 
