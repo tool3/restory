@@ -32,8 +32,8 @@ async function list(argv) {
       color(formattedCommit[0], 'blue'),
       color(formattedCommit[1], 'cyan'),
       color(formattedCommit[2], 'magenta'),
-      color(formattedCommit[3], 'yellow'),
-      color(formattedCommit[4], 'green'),
+      { content: color(formattedCommit[3], 'yellow'), hAlign: 'center' },
+      { content: color(formattedCommit[4], 'green'), hAlign: 'center' },
     ]);
   }
   console.log(t.toString());
