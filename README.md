@@ -11,7 +11,7 @@ npx @tool3/restory <cmd> <args> [options]
 ```
 # api
 ## `list`
-list all commits
+list all commits   
 alias `ls`   
 ### example
 ```bash
