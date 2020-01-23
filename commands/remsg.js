@@ -22,11 +22,6 @@ async function remsg(argv) {
     name: 'message',
     commits,
   });
-  console.log(
-    color('restory done for ', 'green') +
-      color(commits.length, 'whiteBold') +
-      color(' commits', 'green')
-  );
 }
 
 module.exports = remsg;

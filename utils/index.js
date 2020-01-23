@@ -35,8 +35,7 @@ async function command({
   script,
   name,
   gitCmd,
-  commits,
-  replace = false,
+  commits
 }) {
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`, {
@@ -45,7 +44,7 @@ async function command({
     const entity = stdout.trim();
     const spinner = ora({ indent: 2 });
     const shortSha = sha.slice(0, 7);
-    const input = replace ? entity.replace(subject, value) : value;
+    const input = subject ? entity.replace(subject, value) : value;
     let cmd = '';
     if (gitCmd) {
       if (Array.isArray(gitCmd)) {
@@ -71,6 +70,11 @@ async function command({
     await filter(sha, cmd || value);
     spinner.succeed();
   }
+  console.log(
+    color('restory done for ', 'green') +
+      color(commits.length, 'whiteBold') +
+      color(' commits', 'green')
+  );
 }
 
 module.exports = { color, execute, filterBranch, command };

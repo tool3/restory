@@ -1,4 +1,4 @@
-const { color, command } = require('../utils');
+const { command } = require('../utils');
 const { listCommits } = require('./list');
 
 async function remail(argv) {
@@ -11,11 +11,6 @@ async function remail(argv) {
     gitCmd: `export GIT_AUTHOR_EMAIL`,
     commits,
   });
-  console.log(
-    color('restory done for ', 'green') +
-      color(commits.length, 'whiteBold') +
-      color(' commits', 'green')
-  );
 }
 
 module.exports = remail;

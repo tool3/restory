@@ -1,4 +1,4 @@
-const { color, command } = require('../utils');
+const { command } = require('../utils');
 const { listCommits } = require('./list');
 
 async function redate(argv) {
@@ -14,14 +14,8 @@ async function redate(argv) {
     name: 'date',
     script: "git show --no-patch --no-notes --pretty='%cd'",
     gitCmd,
-    commits,
-    replace: true,
+    commits
   });
-  console.log(
-    color('restory done for ', 'green') +
-      color(commits.length, 'whiteBold') +
-      color(' commits', 'green')
-  );
 }
 
 module.exports = redate;

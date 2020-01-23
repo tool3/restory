@@ -49,7 +49,7 @@ yargs
     }
   )
   .command(
-    ['redate <subject> <value>', 'rd'],
+    ['redate [subject] <value>', 'rd'],
     'rewrite commit dates',
     {
       script: {

@@ -1,4 +1,4 @@
-const { color, command } = require('../utils');
+const { command } = require('../utils');
 const { listCommits } = require('./list');
 
 async function reauthor(argv) {
@@ -11,11 +11,6 @@ async function reauthor(argv) {
     gitCmd: `export GIT_AUTHOR_NAME`,
     commits,
   });
-  console.log(
-    color('restory done for ', 'green') +
-      color(commits.length, 'whiteBold') +
-      color(' commits', 'green')
-  );
 }
 
 module.exports = reauthor;
