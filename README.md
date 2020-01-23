@@ -98,7 +98,7 @@ alias: `s`
 description: rewrite a specific commit sha
 
 ### `number`
-type: `string`   
+type: `number`   
 alias: `n`      
 description: number of commits.
 default: 0 (all commits)
