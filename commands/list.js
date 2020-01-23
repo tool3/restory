@@ -7,6 +7,7 @@ async function listCommits({ script }) {
 }
 
 async function list(argv) {
+  argv.script = argv.limit ? `${argv.script} -n ${argv.limit}` : argv.script;
   const commits = await listCommits(argv);
   const chars = argv.compact
     ? {

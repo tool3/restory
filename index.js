@@ -37,7 +37,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: "git log --pretty=oneline --format='%H  %s  %cd  %an  %ae'",
+        default: `git log --pretty=oneline --format='%H  %s  %cd  %an  %ae'`,
       },
     },
     async (argv) => {
@@ -120,12 +120,6 @@ yargs
       }
     }
   )
-  .options('all', {
-    alias: 'a',
-    type: 'boolean',
-    default: true,
-    description: 'rewrite all commits',
-  })
   .options('sha', {
     alias: 's',
     type: 'string',
@@ -142,6 +136,12 @@ yargs
     type: 'boolean',
     default: true,
     description: 'change committer date',
+  })
+  .options('number', {
+    alias: 'n',
+    type: 'number',
+    default: 0,
+    description: 'number of commits (0: all)',
   })
   .demandCommand(1)
   .help()
