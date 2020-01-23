@@ -3,9 +3,12 @@ rewrite git history
 
 # install
 ```bash
-yarn add @tool3/restory
+yarn add @tool3/restory -g
 ```
-
+or 
+```bash
+npx @tool3/restory <cmd> <args> [options]
+```
 # api
 ## `list`
 list all commits
@@ -23,7 +26,7 @@ rewrite commit|s date
 alias `rd`   
 ### usage
 ```bash
-restory redate <string-to-replace> <value>
+restory redate [string-to-replace] <value>
 ```
 ### examples
 - rewrite all commits that has `2021` to year to `1987`   
@@ -35,7 +38,12 @@ restory redate 2021 1987
 - rewrites a specific commit's day
 
 ```bash
-restory redate 'Sat Jan 23' 'Sun Jan 24' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6d29aa'
+restory redate 'Sat Jan 23' 'Sun Jan 24' -s <commit-sha>
+```
+- rewrites the last 5 commits date to now
+
+```bash
+restory redate "$(echo `date`)" -n 5
 ```
 
 ## `reauthor`
