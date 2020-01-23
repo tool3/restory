@@ -12,7 +12,7 @@ async function redate(argv) {
     value,
     subject,
     name: 'date',
-    script: "git show --no-patch --no-notes --pretty='%cd'",
+    script: `git show --no-patch --no-notes --pretty='%cd'`,
     gitCmd,
     commits
   });

@@ -18,7 +18,7 @@ async function remsg(argv) {
   await command({
     value,
     filter,
-    script: "git show --no-patch --no-notes --pretty='%s'",
+    script: `git show --no-patch --no-notes --pretty='%s'`,
     name: 'message',
     commits,
   });

@@ -6,7 +6,7 @@ async function reauthor(argv) {
   const commits = sha ? [sha] : await listCommits(argv);
   await command({
     value,
-    script: "git show --no-patch --no-notes --pretty='%an'",
+    script: `git show --no-patch --no-notes --pretty='%an'`,
     name: 'author',
     gitCmd: `export GIT_AUTHOR_NAME`,
     commits,

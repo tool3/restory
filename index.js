@@ -24,6 +24,7 @@ function logo() {
 yargs
   .config({})
   .middleware(() => logo())
+  .middleware((argv) => argv.script = argv.number ? `${argv.script} -n ${argv.number}` : argv.script)
   .command(
     ['list', 'ls'],
     'list all commits',
@@ -57,6 +58,18 @@ yargs
         type: 'string',
         default: 'git log --format=format:%H',
       },
+      authorDate: {
+        alias: 'd',
+        type: 'boolean',
+        default: true,
+        description: 'change author date',
+      },
+      committerDate: {
+        alias: 'c',
+        type: 'boolean',
+        default: true,
+        description: 'change committer date',
+      }
     },
     async (argv) => {
       try {
@@ -124,18 +137,6 @@ yargs
     alias: 's',
     type: 'string',
     description: 'commit sha to rewrite',
-  })
-  .options('authorDate', {
-    alias: 'd',
-    type: 'boolean',
-    default: true,
-    description: 'change author date',
-  })
-  .options('committerDate', {
-    alias: 'c',
-    type: 'boolean',
-    default: true,
-    description: 'change committer date',
   })
   .options('number', {
     alias: 'n',

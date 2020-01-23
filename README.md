@@ -49,7 +49,11 @@ restory reauthor <author-name>
 ### example
 rewrite all commit author names to The Devil
 ```bash
-restory reauthor 'The Devil'
+restory reauthor `The Devil`
+```
+rewrite last 5 commits author to `James Brown`
+```bash
+restory reauthor 'James Brown' -n 5
 ```
 
 ## `remail`
@@ -78,6 +82,19 @@ rewrite specific commit message
 ```bash
 restory remsg 'this is the new commit msg' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6d29aa'
 ```
+
+# options
+### `sha`
+type: `string`   
+alias: `s`   
+description: rewrite a specific commit sha
+
+### `number`
+type: `string`   
+alias: `n`      
+description: number of commits.
+default: 0 (all commits)
+
 # important usage notes
 ⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️    
 use at your own risk

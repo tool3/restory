@@ -6,7 +6,7 @@ async function remail(argv) {
   const commits = sha ? [sha] : await listCommits(argv);
   await command({
     value,
-    script: "git show --no-patch --no-notes --pretty='%ae'",
+    script: `git show --no-patch --no-notes --pretty='%ae'`,
     name: 'email',
     gitCmd: `export GIT_AUTHOR_EMAIL`,
     commits,
