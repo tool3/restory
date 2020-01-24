@@ -55,7 +55,7 @@ alias `ra`
 restory reauthor <author-name>
 ```
 ### example
-rewrite all commit author names to The Devil
+rewrite all commit author names to `The Devil`
 ```bash
 restory reauthor `The Devil`
 ```
