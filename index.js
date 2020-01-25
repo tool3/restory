@@ -10,7 +10,7 @@ const remsg = require('./commands/remsg');
 
 yargs
   .config({})
-  .usage(`${logo()}restory <command> <args> [options]`)
+  .usage(`${logo()}restory <command> [args] [options]`)
   .middleware(() => console.log(logo().trimEnd()))
   .updateStrings({'Commands:': '\x1b[97m commands\x1b[0m' })
   .updateStrings({'Options:': '\x1b[97m options\x1b[0m' })
