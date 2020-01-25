@@ -21,6 +21,11 @@ restory ls
 output:
 ![](./list.png)
 
+show 5 last commits
+```bash
+restory ls -n 5
+```
+
 ## `redate`
 rewrite commit|s date   
 alias `rd`   

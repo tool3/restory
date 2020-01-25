@@ -37,6 +37,13 @@ async function command({
   gitCmd,
   commits
 }) {
+  // TODOs
+  // - support short shas
+  // - support commit range
+  // - support multiple commits
+  // - don't run when replace value is same as stdout
+  // - show pre-run info
+  // - support custom filter command https://github.com/newren/git-filter-repo#design-rationale-behind-filter-repo
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`, {
       maxBuffer: 100000 * 100000,
