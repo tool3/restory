@@ -21,7 +21,7 @@ async function list(argv) {
   const t = new table({ style: { head: [], border: [] }, ...chars });
   t.push([
     { content: color('SHA', 'whiteBold'), hAlign: 'center' },
-    { content: color('MSG', 'whiteBold'), hAlign: 'center' },
+    { content: color('MESSAGE', 'whiteBold'), hAlign: 'center' },
     { content: color('DATE', 'whiteBold'), hAlign: 'center' },
     { content: color('AUTHOR', 'whiteBold'), hAlign: 'center' },
     { content: color('EMAIL', 'whiteBold'), hAlign: 'center' },

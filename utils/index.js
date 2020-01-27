@@ -30,20 +30,18 @@ async function filterBranch(sha, cmd) {
 
 async function command({
   filter = filterBranch,
-  subject,
-  value,
+  argv,
   script,
   name,
   gitCmd,
   commits
 }) {
   // TODOs
-  // - support short shas
-  // - support commit range
   // - support multiple commits
   // - don't run when replace value is same as stdout
   // - show pre-run info
-  // - support custom filter command https://github.com/newren/git-filter-repo#design-rationale-behind-filter-repo
+  // - add rewrite api
+  const {subject, value} = argv;
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`, {
       maxBuffer: 100000 * 100000,
@@ -74,7 +72,7 @@ async function command({
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
 
-    await filter(sha, cmd || value);
+    argv.customFilter ? await execute(argv.customFilter) : await filter(sha, cmd || value);
     spinner.succeed();
   }
   console.log(

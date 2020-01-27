@@ -14,7 +14,15 @@ yargs
   .middleware(() => console.log(logo().trimEnd()))
   .updateStrings({'Commands:': '\x1b[97m commands\x1b[0m' })
   .updateStrings({'Options:': '\x1b[97m options\x1b[0m' })
-  .middleware((argv) => argv.script = argv.number ? `${argv.script} -n ${argv.number}` : argv.script)
+  .middleware((argv) => { 
+    if (argv.number) {
+      argv.script = `${argv.script} -n ${argv.number}`
+    }
+
+    if (argv.range) {
+      argv.script = `${argv.script} ${argv.range}`
+    }
+  })
   .command(
     ['list', 'ls'],
     'list all commits',
@@ -28,7 +36,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: `git log --pretty=oneline --format='%H  %s  %cd  %an  %ae'`,
+        default: `git log --pretty=oneline --format='%h  %s  %cd  %an  %ae'`,
       },
     },
     async (argv) => {
@@ -127,6 +135,16 @@ yargs
     alias: 's',
     type: 'string',
     description: 'commit sha to rewrite',
+  })
+  .options('range', {
+    alias: 'r',
+    type: 'string',
+    description: 'commit sha range',
+  })
+  .options('custom-filter', {
+    alias: 'f',
+    type: 'string',
+    description: 'custom filter to use instead of filter-branch',
   })
   .options('number', {
     alias: 'n',

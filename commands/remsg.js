@@ -1,4 +1,4 @@
-const { color, command, execute } = require('../utils');
+const { command, execute } = require('../utils');
 const { listCommits } = require('./list');
 
 async function filter(sha, cmd) {
@@ -13,10 +13,10 @@ async function filter(sha, cmd) {
 }
 
 async function remsg(argv) {
-  const { sha, value } = argv;
+  const { sha } = argv;
   const commits = sha ? [sha] : await listCommits(argv);
   await command({
-    value,
+    argv,
     filter,
     script: `git show --no-patch --no-notes --pretty='%s'`,
     name: 'message',
