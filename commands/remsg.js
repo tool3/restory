@@ -2,8 +2,9 @@ const { command, execute } = require('../utils');
 const { listCommits } = require('./list');
 
 async function filter(sha, cmd) {
+  const shortSha = "${GIT_COMMIT:0:7}";
     const script = `git filter-branch -f --msg-filter \
-      'if [ $GIT_COMMIT = ${sha} ]
+      'if [ ${shortSha} = ${sha} ]
        then
           echo "${cmd}"
        else 
