@@ -20,8 +20,9 @@ function color(msg, color) {
 }
 
 async function filterBranch(sha, cmd) {
+  const shortSha = "${GIT_COMMIT:0:7}";
   const script = `git filter-branch -f --env-filter \
-    'if [ $GIT_COMMIT = ${sha} ]
+    'if [ ${shortSha} = ${sha} ]
      then
         ${cmd}
      fi'`;

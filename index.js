@@ -54,7 +54,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: 'git log --format=format:%H',
+        default: 'git log --format=format:%h',
       },
       authorDate: {
         alias: 'd',
@@ -84,7 +84,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: 'git log --format=format:%H',
+        default: 'git log --format=format:%h',
       },
     },
     async (argv) => {
@@ -102,7 +102,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: 'git log --format=format:%H',
+        default: 'git log --format=format:%h',
       },
     },
     async (argv) => {
@@ -120,7 +120,7 @@ yargs
       script: {
         description: 'list commit script',
         type: 'string',
-        default: 'git log --format=format:%H',
+        default: 'git log --format=format:%h',
       },
     },
     async (argv) => {
