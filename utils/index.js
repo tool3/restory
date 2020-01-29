@@ -26,8 +26,8 @@ const baseCmd = (sha) => `${__dirname}/git-filter-repo --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
-function getOperand({ entity, replace, name, subject, value }) {
-  return replace
+function getOperand({ entity, name, subject, value }) {
+  return subject
     ? `commit.${name} = b"${entity.replace(subject, value)}"`
     : `commit.${name} = b"${value}"`;
 }
@@ -35,13 +35,12 @@ function getOperand({ entity, replace, name, subject, value }) {
 async function gitFilterRepo(
   sha,
   name,
-  { value, committer, replace, subject },
+  { value, committer, subject },
   entity
 ) {
   const baseScript = `${baseCmd(sha)}${space()}${getOperand({
     entity,
     name,
-    replace,
     subject,
     value,
   })}`;
@@ -49,12 +48,10 @@ async function gitFilterRepo(
     ? `${baseScript}\n${space()}${getOperand({
         entity,
         name: name.replace('author', 'committer'),
-        replace,
         subject,
         value,
       })}'`
     : `${baseScript}'`;
-    console.log(script)
   await execute(script);
 }
 
