@@ -150,7 +150,7 @@ yargs
   .options('git-filter-repo', {
     alias: 'g',
     type: 'boolean',
-    default: false,
+    default: true,
     description: 'use git filter-repo instead of filter-branch',
   })
   .demandCommand(1)

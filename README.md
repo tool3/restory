@@ -116,9 +116,8 @@ description: range of commits to operate on.
 ### `git-filter-repo`
 type: `boolean`   
 alias: `g`      
-description: use git filter-repo - this method is extremely fast compared to the default.
-and requires [`git filter-repo`](https://github.com/newren/git-filter-repo)    
-default: `false`
+description: use git filter-repo - this method is extremely fast compared to the default.   
+default: `true`
 
 # important usage notes
 ⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️    
@@ -127,6 +126,5 @@ use at your own risk
 things to know:
 - every `restory` command recreates the commit|s shas.
 - you need to have a clean working directory.
-- unless using `git filter-repo` (`-g`) - rewriting history takes a while! I added a spinner and what commit it's currently processing but still it takes time, let it run, and validate the results with `restory ls` when it's done.
 - you will have to force push.
 - when run without `--sha || -s` flag - the command will rewrite **ALL** commits with given input.
