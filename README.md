@@ -93,7 +93,7 @@ restory remsg <commit-msg>
 ### example
 rewrite specific commit message
 ```bash
-restory remsg 'this is the new commit msg' -s '620a83bdc1e58aa9c487ec1a1d1496b25d6d29aa'
+restory remsg 'this is the new commit msg' -s '620a83b'
 ```
 
 # options
