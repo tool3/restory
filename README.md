@@ -100,16 +100,19 @@ restory remsg 'this is the new commit msg' -s '620a83bdc1e58aa9c487ec1a1d1496b25
 ### `sha`
 type: `string`   
 alias: `s`   
-description: rewrite a specific commit sha
+description: rewrite a specific commit sha.    
+usage: `restory <cmd> [args] -s <short-sha>`
 ### `range`
-type: `string`   
+type: `array`   
 alias: `r`      
-description: range of commits to operate on.
+description: range of commits to operate on.    
+usage: `restory <cmd> [args] -r <start-sha> <end-sha>`
 ### `number`
 type: `number`   
 alias: `n`      
 description: number of commits.
 default: 0 (all commits)
+usage: `restory <cmd> [args] -n <number>`
 ### `committer`
 type: `boolean`   
 alias: `c`      
