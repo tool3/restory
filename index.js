@@ -12,15 +12,15 @@ yargs
   .config({})
   .usage(`${logo()}restory <command> [args] [options]`)
   .middleware(() => console.log(logo().trimEnd()))
-  .updateStrings({'Commands:': '\x1b[97m commands\x1b[0m' })
-  .updateStrings({'Options:': '\x1b[97m options\x1b[0m' })
-  .middleware((argv) => { 
+  .updateStrings({ 'Commands:': '\x1b[97m commands\x1b[0m' })
+  .updateStrings({ 'Options:': '\x1b[97m options\x1b[0m' })
+  .middleware((argv) => {
     if (argv.number) {
-      argv.script = `${argv.script} -n ${argv.number}`
+      argv.script = `${argv.script} -n ${argv.number}`;
     }
 
     if (argv.range) {
-      argv.script = `${argv.script} ${argv.range.join('..')}`
+      argv.script = `${argv.script} ${argv.range.join('..')}`;
     }
   })
   .command(
@@ -30,7 +30,7 @@ yargs
       compact: {
         alias: 'c',
         description: 'show compact table',
-        type: 'boolean',  
+        type: 'boolean',
         default: true,
       },
       script: {
@@ -56,18 +56,6 @@ yargs
         type: 'string',
         default: 'git log --format=format:%h',
       },
-      authorDate: {
-        alias: 'd',
-        type: 'boolean',
-        default: true,
-        description: 'change author date',
-      },
-      committerDate: {
-        alias: 'c',
-        type: 'boolean',
-        default: true,
-        description: 'change committer date',
-      }
     },
     async (argv) => {
       try {
@@ -146,6 +134,12 @@ yargs
     type: 'number',
     default: 0,
     description: 'number of commits (0: all)',
+  })
+  .options('committer', {
+    alias: 'c',
+    type: 'boolean',
+    default: true,
+    description: 'include committer fields (e.g committer_date)',
   })
   .options('git-filter-repo', {
     alias: 'g',

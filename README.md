@@ -101,22 +101,24 @@ restory remsg 'this is the new commit msg' -s '620a83bdc1e58aa9c487ec1a1d1496b25
 type: `string`   
 alias: `s`   
 description: rewrite a specific commit sha
-
+### `range`
+type: `string`   
+alias: `r`      
+description: range of commits to operate on.
 ### `number`
 type: `number`   
 alias: `n`      
 description: number of commits.
 default: 0 (all commits)
-
-### `range`
-type: `string`   
-alias: `r`      
-description: range of commits to operate on.
-
+### `committer`
+type: `boolean`   
+alias: `c`      
+description: include committer fields. for example: `author_date` will also include `committer_date` in the rewrite.   
+default: `true`
 ### `git-filter-repo`
 type: `boolean`   
 alias: `g`      
-description: use git filter-repo - this method is extremely fast compared to the default.   
+description: use [`git filter-repo`](https://github.com/newren/git-filter-repo) insteads of `git filter-branch` - this method is extremely fast compared filter-branch.   
 default: `true`
 
 # important usage notes

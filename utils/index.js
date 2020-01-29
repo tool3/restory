@@ -1,5 +1,6 @@
 const execute = require('util').promisify(require('child_process').exec);
 const ora = require('ora');
+const { argv } = require('process');
 
 const colors = {
   white: '\x1b[97m',
@@ -21,24 +22,47 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = sha => `${__dirname}/git-filter-repo --commit-callback '
+const baseCmd = (sha) => `${__dirname}/git-filter-repo --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
-`
+`;
 
-async function gitFilterRepo(sha, name, value, committer = false) {
-  const [subject, verb] = name.split('_')
-  const output = verb ? `${subject}_${verb}` : subject;
-  const baseScript = `${baseCmd(sha)}${space()}commit.${output} = b"${value}"`;
-  const script = committer ? `${baseScript}\n${space()}commit.committer_${verb} = b"${value}"'` : `${baseScript}'`
+function getOperand({ replace, name, subject, value }) {
+  return replace
+    ? `commit.${name} = commit.${name}.replace(b"${subject}", b"${value}")`
+    : `commit.${name} = b"${value}"`;
+}
+
+async function gitFilterRepo(
+  sha,
+  name,
+  { value, committer, replace, subject }
+) {
+  const baseScript = `${baseCmd(sha)}${space()}${getOperand({
+    name,
+    replace,
+    subject,
+    value,
+  })}`;
+  const script = committer
+    ? `${baseScript}\n${space()}${getOperand({
+        name: name.replace('author', 'committer'),
+        replace,
+        subject,
+        value,
+      })}'`
+    : `${baseScript}'`;
+    console.log(script)
   await execute(script);
 }
 
 async function gitCommand(argv) {
-  return argv.gitFilterRepo ? baseCmd(argv.sha) : 'git filter-branch -f --env-filter'
+  return argv.gitFilterRepo
+    ? baseCmd(argv.sha)
+    : 'git filter-branch -f --env-filter';
 }
 
 async function filterBranch(argv, cmd) {
-  const shortSha = "${GIT_COMMIT:0:7}";
+  const shortSha = '${GIT_COMMIT:0:7}';
   const script = `${await gitCommand(argv)} \
     'if [ ${shortSha} = ${argv.sha} ]
      then
@@ -54,7 +78,6 @@ async function command({
   name,
   gitCmd,
   commits,
-  committer = false
 }) {
   // TODOs
   // - support multiple commits
@@ -62,7 +85,7 @@ async function command({
   // - show pre-run info
   // - add rewrite api
   const start = Date.now();
-  const {subject, value} = argv;
+  const { subject, value } = argv;
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`, {
       maxBuffer: 100000 * 100000,
@@ -92,15 +115,19 @@ async function command({
         'dim'
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
-    
-    argv.gitFilterRepo ? await gitFilterRepo(sha, name, argv.value, committer) : await filter(argv, cmd || value);
+
+    argv.gitFilterRepo
+      ? await gitFilterRepo(sha, name, argv)
+      : await filter(argv, cmd || value);
     spinner.succeed();
   }
-  const runTime  = (Date.now() - start) / 1000;
+  const runTime = (Date.now() - start) / 1000;
   console.log(
     color('\n  restory rewrote ', 'green') +
       color(commits.length, 'whiteBold') +
-      color(' commits', 'green') + color(` in `, 'green') + color(`${runTime}s`, 'dim')
+      color(' commits', 'green') +
+      color(` in `, 'green') +
+      color(`${runTime}s`, 'dim')
   );
 }
 
@@ -111,12 +138,10 @@ function logo() {
   [38;2;254;68;60m|[39m[38;2;254;57;71m_[39m[38;2;253;47;83m|[39m[38;2;250;38;95m [39m[38;2;246;29;107m|[39m[38;2;241;22;120m_[39m[38;2;235;15;132m_[39m[38;2;228;10;145m_[39m[38;2;219;6;158m|[39m[38;2;210;3;170m_[39m[38;2;200;1;182m_[39m[38;2;189;1;193m_[39m[38;2;178;1;203m|[39m[38;2;166;3;213m_[39m[38;2;154;7;222m|[39m[38;2;141;11;230m [39m[38;2;129;17;237m|[39m[38;2;116;24;243m_[39m[38;2;103;32;248m_[39m[38;2;91;40;251m_[39m[38;2;79;50;253m|[39m[38;2;68;61;254m_[39m[38;2;57;72;254m|[39m[38;2;46;83;253m [39m[38;2;37;95;250m|[39m[38;2;29;108;246m_[39m[38;2;21;120;241m [39m[38;2;15;133;235m [39m[38;2;10;146;227m|[39m[38;2;5;158;219m[39m
   [38;2;254;57;71m [39m[38;2;253;47;83m [39m[38;2;250;38;95m [39m[38;2;246;29;107m [39m[38;2;241;22;120m [39m[38;2;235;15;132m [39m[38;2;228;10;145m [39m[38;2;219;6;158m [39m[38;2;210;3;170m [39m[38;2;200;1;182m [39m[38;2;189;1;193m [39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m [39m[38;2;141;11;230m [39m[38;2;129;17;237m [39m[38;2;116;24;243m [39m[38;2;103;32;248m [39m[38;2;91;40;251m [39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m [39m[38;2;46;83;253m [39m[38;2;37;95;250m [39m[38;2;29;108;246m|[39m[38;2;21;120;241m_[39m[38;2;15;133;235m_[39m[38;2;10;146;227m_[39m[38;2;5;158;219m|[39m[38;2;3;170;210m[39m
   [38;2;253;47;83m[39m
-  `
+  `;
 }
 
 module.exports = { color, execute, filterBranch, command, logo };
-
-
 
 // author_name,
 // author_email,

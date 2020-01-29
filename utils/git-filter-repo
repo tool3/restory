@@ -3634,8 +3634,8 @@ class RepoFilter(object):
       location = ['-C', self._args.target] if self._args.target else []
       fip_cmd = ['git'] + location + ['-c', 'core.ignorecase=false',
                                       'fast-import', '--force', '--quiet']
-      if date_format_permissive:
-        fip_cmd.append('--date-format=raw-permissive')
+      
+      fip_cmd.append('--date-format=rfc2822')
       if self._args.state_branch:
         target_marks_file = self._load_marks_file(b'target-marks')
         fip_cmd.extend([b'--export-marks='+target_marks_file,

@@ -10,8 +10,7 @@ async function reauthor(argv) {
     script: `git show --no-patch --no-notes --pretty='%an'`,
     name: 'author_name',
     gitCmd: `export GIT_AUTHOR_NAME`,
-    commits,
-    committer: true
+    commits
   });
 }
 
