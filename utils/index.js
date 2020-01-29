@@ -51,7 +51,6 @@ async function gitFilterRepo(
         value,
       })}'`
     : `${baseScript}'`;
-    console.log(script)
   await execute(script);
 }
 
