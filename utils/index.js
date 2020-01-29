@@ -61,6 +61,7 @@ async function command({
   // - don't run when replace value is same as stdout
   // - show pre-run info
   // - add rewrite api
+  const start = Date.now();
   const {subject, value} = argv;
   for (const sha of commits) {
     const { stdout } = await execute(`${script} ${sha}`, {
@@ -95,10 +96,11 @@ async function command({
     argv.gitFilterRepo ? await gitFilterRepo(sha, name, argv.value, committer) : await filter(argv, cmd || value);
     spinner.succeed();
   }
+  const runTime  = (Date.now() - start) / 1000;
   console.log(
-    color('restory done for ', 'green') +
+    color('\n  restory rewrote ', 'green') +
       color(commits.length, 'whiteBold') +
-      color(' commits', 'green')
+      color(' commits', 'green') + color(` in `, 'green') + color(`${runTime}s`, 'dim')
   );
 }
 
