@@ -117,7 +117,7 @@ description: range of commits to operate on.
 type: `boolean`   
 alias: `g`      
 description: use git filter-repo - this method is extremely fast compared to the default.
-and requires [`git filter-repo`](https://github.com/newren/git-filter-repo)
+and requires [`git filter-repo`](https://github.com/newren/git-filter-repo)    
 default: `false`
 
 # important usage notes

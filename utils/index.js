@@ -27,9 +27,10 @@ const baseCmd = sha => `git filter-repo --commit-callback '
 
 async function gitFilterRepo(sha, name, value, committer = false) {
   const [subject, verb] = name.split('_')
-  const baseScript = `${baseCmd(sha)}${space()}commit.${subject}_${verb} = b"${value}"`;
+  const output = verb ? `${subject}_${verb}` : subject;
+  const baseScript = `${baseCmd(sha)}${space()}commit.${output} = b"${value}"`;
   const script = committer ? `${baseScript}\n${space()}commit.committer_${verb} = b"${value}"'` : `${baseScript}'`
-  return await execute(script);
+  await execute(script);
 }
 
 async function gitCommand(argv) {
@@ -91,7 +92,7 @@ async function command({
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
     
-    argv.gitFilterRepo ? await gitFilterRepo(argv.sha, name, argv.value, committer) : await filter(argv, cmd || value);
+    argv.gitFilterRepo ? await gitFilterRepo(sha, name, argv.value, committer) : await filter(argv, cmd || value);
     spinner.succeed();
   }
   console.log(
