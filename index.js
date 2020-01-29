@@ -20,7 +20,7 @@ yargs
     }
 
     if (argv.range) {
-      argv.script = `${argv.script} ${argv.range}`
+      argv.script = `${argv.script} ${argv.range.join('..')}`
     }
   })
   .command(
@@ -138,7 +138,7 @@ yargs
   })
   .options('range', {
     alias: 'r',
-    type: 'string',
+    type: 'array',
     description: 'commit sha range',
   })
   .options('number', {
