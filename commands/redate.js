@@ -8,12 +8,14 @@ async function redate(argv) {
     committerDate && authorDate
       ? ['export GIT_AUTHOR_DATE', 'export GIT_COMMITTER_DATE']
       : ['export GIT_COMMITTER_DATE'];
+  
   await command({
     argv,
-    name: 'date',
+    name: 'author_date',
     script: `git show --no-patch --no-notes --pretty='%cd'`,
     gitCmd,
-    commits
+    commits,
+    committer: true
   });
 }
 

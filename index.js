@@ -141,17 +141,18 @@ yargs
     type: 'string',
     description: 'commit sha range',
   })
-  .options('custom-filter', {
-    alias: 'f',
-    type: 'string',
-    description: 'custom filter to use instead of filter-branch',
-  })
   .options('number', {
     alias: 'n',
     type: 'number',
     default: 0,
     description: 'number of commits (0: all)',
   })
+  .options('git-filter-repo', {
+    alias: 'g',
+    type: 'boolean',
+    default: false,
+    description: 'use git filter-repo instead of filter-branch',
+  })
   .demandCommand(1)
   .help()
-  .wrap(90).argv;
+  .wrap(100).argv;

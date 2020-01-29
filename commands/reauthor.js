@@ -4,12 +4,14 @@ const { listCommits } = require('./list');
 async function reauthor(argv) {
   const { sha } = argv;
   const commits = sha ? [sha] : await listCommits(argv);
+
   await command({
     argv,
     script: `git show --no-patch --no-notes --pretty='%an'`,
-    name: 'author',
+    name: 'author_name',
     gitCmd: `export GIT_AUTHOR_NAME`,
     commits,
+    committer: true
   });
 }
 

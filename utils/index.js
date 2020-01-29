@@ -19,10 +19,27 @@ function color(msg, color) {
   return `${colors[color] || color}${msg}${colors.reset}`;
 }
 
-async function filterBranch(sha, cmd) {
+const space = (num = 4) => ' '.repeat(num);
+
+const baseCmd = sha => `git filter-repo --commit-callback '
+  ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
+`
+
+async function gitFilterRepo(sha, name, value, committer = false) {
+  const [subject, verb] = name.split('_')
+  const baseScript = `${baseCmd(sha)}${space()}commit.${subject}_${verb} = b"${value}"`;
+  const script = committer ? `${baseScript}\n${space()}commit.committer_${verb} = b"${value}"'` : `${baseScript}'`
+  return await execute(script);
+}
+
+async function gitCommand(argv) {
+  return argv.gitFilterRepo ? baseCmd(argv.sha) : 'git filter-branch -f --env-filter'
+}
+
+async function filterBranch(argv, cmd) {
   const shortSha = "${GIT_COMMIT:0:7}";
-  const script = `git filter-branch -f --env-filter \
-    'if [ ${shortSha} = ${sha} ]
+  const script = `${await gitCommand(argv)} \
+    'if [ ${shortSha} = ${argv.sha} ]
      then
         ${cmd}
      fi'`;
@@ -35,7 +52,8 @@ async function command({
   script,
   name,
   gitCmd,
-  commits
+  commits,
+  committer = false
 }) {
   // TODOs
   // - support multiple commits
@@ -72,8 +90,8 @@ async function command({
         'dim'
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
-
-    argv.customFilter ? await execute(argv.customFilter) : await filter(sha, cmd || value);
+    
+    argv.gitFilterRepo ? await gitFilterRepo(argv.sha, name, argv.value, committer) : await filter(argv, cmd || value);
     spinner.succeed();
   }
   console.log(
@@ -94,3 +112,18 @@ function logo() {
 }
 
 module.exports = { color, execute, filterBranch, command, logo };
+
+
+
+// author_name,
+// author_email,
+// author_date,
+// committer_name,
+// committer_email,
+// committer_date,
+// message,
+// file_changes,
+// parents,
+// original_id
+
+// commit.message = "hello" if commit.original_id == "db78265" else commit.message = commit.message

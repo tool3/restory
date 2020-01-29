@@ -20,7 +20,7 @@ async function remsg(argv) {
     argv,
     filter,
     script: `git show --no-patch --no-notes --pretty='%s'`,
-    name: 'message',
+    name: 'author_message',
     commits,
   });
 }
