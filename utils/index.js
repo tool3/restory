@@ -1,6 +1,6 @@
 const execute = require('util').promisify(require('child_process').exec);
 const ora = require('ora');
-const { argv } = require('process');
+let counter = 0;
 
 const colors = {
   white: '\x1b[97m',
@@ -26,18 +26,20 @@ const baseCmd = (sha) => `${__dirname}/git-filter-repo --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
-function getOperand({ replace, name, subject, value }) {
+function getOperand({ entity, replace, name, subject, value }) {
   return replace
-    ? `commit.${name} = commit.${name}.replace(b"${subject}", b"${value}")`
+    ? `commit.${name} = b"${entity.replace(subject, value)}"`
     : `commit.${name} = b"${value}"`;
 }
 
 async function gitFilterRepo(
   sha,
   name,
-  { value, committer, replace, subject }
+  { value, committer, replace, subject },
+  entity
 ) {
   const baseScript = `${baseCmd(sha)}${space()}${getOperand({
+    entity,
     name,
     replace,
     subject,
@@ -45,12 +47,14 @@ async function gitFilterRepo(
   })}`;
   const script = committer
     ? `${baseScript}\n${space()}${getOperand({
+        entity,
         name: name.replace('author', 'committer'),
         replace,
         subject,
         value,
       })}'`
     : `${baseScript}'`;
+    console.log(script)
   await execute(script);
 }
 
@@ -116,7 +120,7 @@ async function command({
     );
 
     argv.gitFilterRepo
-      ? await gitFilterRepo(sha, name, argv)
+      ? await gitFilterRepo(sha, name, argv, entity)
       : await filter(argv, cmd || value);
     spinner.succeed();
   }
