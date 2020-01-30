@@ -72,9 +72,9 @@ rewrite all commit author names to `The Devil`
 ```bash
 restory reauthor 'The Devil'
 ```
-rewrite last 5 commits author to `James Brown`
+rewrite last 5 commits author to `Jebediah Kerman`
 ```bash
-restory reauthor 'James Brown' -n 5
+restory reauthor 'Jebediah Kerman' -n 5
 ```
 
 ## `remail`
@@ -87,7 +87,7 @@ restory remail <author-email>
 ```
 
 ### example
-rewrite all commit author email to 'thedevil@666.com'
+rewrite all commit author email to `thedevil@666.com`
 ```bash
 restory remail 'thedevil@666.com'
 ```
@@ -129,7 +129,7 @@ default: `true`
 ### `git-filter-repo`
 type: `boolean`   
 alias: `g`      
-description: use [`git filter-repo`](https://github.com/newren/git-filter-repo) insteads of `git filter-branch` - this method is extremely fast compared filter-branch.   
+description: use [`git filter-repo`](https://github.com/newren/git-filter-repo) insteads of `git filter-branch` - this method is extremely fast compared to filter-branch.   
 default: `true`
 
 # important usage notes
