@@ -59,6 +59,11 @@ yargs
     },
     async (argv) => {
       try {
+        if (argv.subject) {
+          const value = argv.value;
+          argv.value = argv.subject;
+          argv.subject = value;
+        }
         await redate(argv);
       } catch (error) {
         throw color(error.message, 'red');

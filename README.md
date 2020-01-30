@@ -9,6 +9,11 @@ or
 ```bash
 npx @tool3/restory <cmd> <args> [options]
 ```
+
+# features
+- super fast! uses it's own distro of [`git-filter-repo`](https://github.com/newren/git-filter-repo)
+
+
 # api
 ## `list`
 list all commits   
