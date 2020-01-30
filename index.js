@@ -22,6 +22,12 @@ yargs
     if (argv.range) {
       argv.script = `${argv.script} ${argv.range.join('..')}`;
     }
+
+    if (argv.subject) {
+      const value = argv.value;
+      argv.value = argv.subject;
+      argv.subject = value;
+    }
   })
   .command(
     ['list', 'ls'],
@@ -59,11 +65,6 @@ yargs
     },
     async (argv) => {
       try {
-        if (argv.subject) {
-          const value = argv.value;
-          argv.value = argv.subject;
-          argv.subject = value;
-        }
         await redate(argv);
       } catch (error) {
         throw color(error.message, 'red');
@@ -71,7 +72,7 @@ yargs
     }
   )
   .command(
-    ['reauthor <value>', 'ra'],
+    ['reauthor [subject] <value>', 'ra'],
     'rewrite author name',
     {
       script: {
@@ -89,7 +90,7 @@ yargs
     }
   )
   .command(
-    ['remail <value>', 're'],
+    ['remail [subject] <value>', 're'],
     'rewrite author email',
     {
       script: {
@@ -107,7 +108,7 @@ yargs
     }
   )
   .command(
-    ['remsg <value>', 'rm'],
+    ['remsg [subject]  <value>', 'rm'],
     'rewrite commit msg',
     {
       script: {
