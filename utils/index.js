@@ -22,7 +22,7 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = (sha) => `${__dirname}/git-filter-repo/git-filter-repo --commit-callback '
+const baseCmd = (sha) => `${__dirname}/git-filter-repo/git-filter-repo -f --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
