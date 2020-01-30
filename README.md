@@ -12,7 +12,8 @@ npx @tool3/restory <cmd> [args] [options]
 
 # features
 - super fast! uses it's own distro of [`git-filter-repo`](https://github.com/newren/git-filter-repo)
-
+- simple api
+- standalone (does not rely on you actually having `git-filter-repo`
 
 # api
 ## `list`
