@@ -70,7 +70,7 @@ restory reauthor <author-name>
 ### example
 rewrite all commit author names to `The Devil`
 ```bash
-restory reauthor `The Devil`
+restory reauthor 'The Devil'
 ```
 rewrite last 5 commits author to `James Brown`
 ```bash
@@ -119,7 +119,7 @@ usage: `restory <cmd> [args] -r <start-sha> <end-sha>`
 type: `number`   
 alias: `n`      
 description: number of commits.
-default: 0 (all commits)
+default: 0 (all commits)    
 usage: `restory <cmd> [args] -n <number>`
 ### `committer`
 type: `boolean`   
