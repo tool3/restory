@@ -80,7 +80,8 @@ list all commits
 ```bash
 restory ls
 ```
-![](./ls.png)
+![](./ls.png)   
+[![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
 
 list last 5 commits
 ```bash
