@@ -1,4 +1,4 @@
-# restory
+![](./restory.png)   
 rewrite git history
 
 # install
