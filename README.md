@@ -1,5 +1,5 @@
 ![](./restory.png)   
-rewrite git history
+re~~write git his~~tory
 
 # install
 ```bash
