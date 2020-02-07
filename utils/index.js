@@ -113,7 +113,7 @@ async function command({
         'dim'
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
-
+    console.log(argv)
     argv.gitFilterRepo
       ? await gitFilterRepo(sha, name, argv, entity)
       : await filter(argv, cmd || value);

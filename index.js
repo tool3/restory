@@ -142,7 +142,7 @@ yargs
     description: 'number of commits (0: all)',
   })
   .options('safe', {
-    alias: 'g',
+    alias: 'S',
     type: 'boolean',
     default: false,
     description: 'remove origin when done',
