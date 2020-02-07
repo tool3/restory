@@ -21,7 +21,7 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = (sha) => `${__dirname}/git-filter-repo/git-filter-repo.py -f --commit-callback '
+const baseCmd = (sha, safe) => `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
@@ -34,10 +34,10 @@ function getOperand({ entity, name, subject, value }) {
 async function gitFilterRepo(
   sha,
   name,
-  { value, committer, subject },
+  { value, committer, subject, safe},
   entity
 ) {
-  const baseScript = `${baseCmd(sha)}${space()}${getOperand({
+  const baseScript = `${baseCmd(sha, safe)}${space()}${getOperand({
     entity,
     name,
     subject,
@@ -56,7 +56,7 @@ async function gitFilterRepo(
 
 async function gitCommand(argv) {
   return argv.gitFilterRepo
-    ? baseCmd(argv.sha)
+    ? baseCmd(argv.sha, argv.safe)
     : 'git filter-branch -f --env-filter';
 }
 
