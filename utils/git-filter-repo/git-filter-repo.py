@@ -1991,6 +1991,8 @@ EXAMPLES
                "performed and commands being run.  When used together "
                "with --dry-run, also show extra information about what "
                "would be run."))
+    misc.add_argument('--safe', action='store_true',
+        help=_("Remove origin when done"))
     # WARNING: --state-branch has some problems:
     #   * It does not work well with manually inserted objects (user creating
     #     Blob() or Commit() or Tag() objects and calling
@@ -2015,8 +2017,6 @@ EXAMPLES
                "to include original-oid directives)."))
     misc.add_argument('--quiet', action='store_true',
         help=_("Pass --quiet to other git commands called"))
-    misc.add_argument('--safe', action='store_true',
-        help=_("Remove origin when done"))
     return parser
 
   @staticmethod
