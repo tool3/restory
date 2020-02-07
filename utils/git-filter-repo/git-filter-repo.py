@@ -2015,6 +2015,8 @@ EXAMPLES
                "to include original-oid directives)."))
     misc.add_argument('--quiet', action='store_true',
         help=_("Pass --quiet to other git commands called"))
+    misc.add_argument('--safe', action='store_true',
+        help=_("Remove origin when done"))
     return parser
 
   @staticmethod
