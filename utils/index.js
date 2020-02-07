@@ -55,6 +55,7 @@ async function gitFilterRepo(
 }
 
 async function gitCommand(argv) {
+  console.log(argv)
   return argv.gitFilterRepo
     ? baseCmd(argv.sha, argv.safe)
     : 'git filter-branch -f --env-filter';
