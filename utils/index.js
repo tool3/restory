@@ -21,7 +21,7 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = (sha, safe) => `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
+const baseCmd = (sha, safe) => console.log('safe is ', safe) || `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
@@ -55,7 +55,6 @@ async function gitFilterRepo(
 }
 
 async function gitCommand(argv) {
-  console.log(argv)
   return argv.gitFilterRepo
     ? baseCmd(argv.sha, argv.safe)
     : 'git filter-branch -f --env-filter';
@@ -114,7 +113,7 @@ async function command({
         'dim'
       )} ${color('to', 'white')} ${color(value, 'magenta')}`
     );
-          console.log(argv)
+
     argv.gitFilterRepo
       ? await gitFilterRepo(sha, name, argv, entity)
       : await filter(argv, cmd || value);
