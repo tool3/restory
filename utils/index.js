@@ -21,7 +21,7 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = (sha, safe) => console.log('safe is ', safe) || `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
+const baseCmd = (sha, safe) => `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
