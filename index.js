@@ -141,6 +141,12 @@ yargs
     default: 0,
     description: 'number of commits (0: all)',
   })
+  .options('safe', {
+    alias: 'g',
+    type: 'boolean',
+    default: false,
+    description: 'remove origin when done',
+  })
   .options('committer', {
     alias: 'c',
     type: 'boolean',
