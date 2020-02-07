@@ -1,6 +1,5 @@
 const execute = require('util').promisify(require('child_process').exec);
 const ora = require('ora');
-let counter = 0;
 
 const colors = {
   white: '\x1b[97m',
@@ -22,7 +21,7 @@ function color(msg, color) {
 
 const space = (num = 4) => ' '.repeat(num);
 
-const baseCmd = (sha) => `${__dirname}/git-filter-repo/git-filter-repo -f --commit-callback '
+const baseCmd = (sha) => `${__dirname}/git-filter-repo/git-filter-repo.py -f --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
@@ -80,7 +79,6 @@ async function command({
   commits,
 }) {
   // TODOs
-  // - support multiple commits
   // - don't run when replace value is same as stdout
   // - show pre-run info
   // - add rewrite api
