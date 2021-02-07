@@ -1991,7 +1991,7 @@ EXAMPLES
                "performed and commands being run.  When used together "
                "with --dry-run, also show extra information about what "
                "would be run."))
-    misc.add_argument('--safe', default='store_false',
+    misc.add_argument('--safe', action='store_false',
         help=_("Remove origin when done"))
     # WARNING: --state-branch has some problems:
     #   * It does not work well with manually inserted objects (user creating
