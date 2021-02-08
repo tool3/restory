@@ -25,32 +25,44 @@ const baseCmd = (sha, safe) => `${__dirname}/git-filter-repo/git-filter-repo.py 
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 
-function getOperand({ entity, name, subject, value }) {
-  return subject
-    ? `commit.${name} = b"${entity.replace(subject, value)}"`
-    : `commit.${name} = b"${value}"`;
+function getOperand({ entity, name, argv }) {
+  const {subject, value, rewritten} = argv;
+  const output = (output, name, subject, value) => {
+    return subject ? `commit.${name} = b"${output.replace(subject, value)}"` : `commit.${name} = b"${value}"` 
+  };
+  if (rewritten) {
+    const result = Object.keys(rewritten).map(key => {
+      const {index, value} = rewritten[key]
+      const [...stdout] = entity.split('--');
+      const stdoutValue = stdout[index];
+      return output(stdoutValue, key, rewritten[key].key || key, value);
+    }).join(`\n${space()}`);
+    return result;
+  }
+  return output(entity, name, subject, value);
 }
 
 async function gitFilterRepo(
   sha,
   name,
-  { value, committer, subject, safe},
+  argv,
   entity
 ) {
-  const baseScript = `${baseCmd(sha, safe)}${space()}${getOperand({
+  const { committer,  safe } = argv;
+  const operand = getOperand({
     entity,
     name,
-    subject,
-    value,
-  })}`;
+    argv
+  });
+  const baseScript = `${baseCmd(sha, safe)}${space()}${operand}`;
   const script = committer
     ? `${baseScript}\n${space()}${getOperand({
         entity,
         name: name.replace('author', 'committer'),
-        subject,
-        value,
+        argv
       })}'`
     : `${baseScript}'`;
+    console.log(script)
   await execute(script);
 }
 
@@ -83,8 +95,16 @@ async function command({
   // - show pre-run info
   // - add rewrite api
   const start = Date.now();
-  const { subject, value } = argv;
+  const args = {};
+  if (argv.rewritten) {
+    Object.assign(args, argv.rewritten);
+  } else {
+    const { subject, value } = argv;
+    Object.assign(args, {subject, value});
+  }
+  
   for (const sha of commits) {
+    const { subject, value } = args;
     const { stdout } = await execute(`${script} ${sha}`, {
       maxBuffer: 100000 * 100000,
     });
@@ -100,20 +120,19 @@ async function command({
         cmd = `${gitCmd}="${input}"`;
       }
     }
+    const commitTitle = `${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${color(
+      name,
+      'white'
+    )} ${color(
+      `${entity.replace(
+        subject,
+        `${colors.underline}${subject}${colors.dim}`
+      )}`,
+      'dim'
+    )} ${color('to', 'white')} ${color(value, 'magenta')}`;
 
-    spinner.start(
-      `${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${color(
-        name,
-        'white'
-      )} ${color(
-        `${entity.replace(
-          subject,
-          `${colors.underline}${subject}${colors.dim}`
-        )}`,
-        'dim'
-      )} ${color('to', 'white')} ${color(value, 'magenta')}`
-    );
-    console.log(argv)
+    const title = argv.rewritten ? `rewriting ${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${Object.keys(argv.rewritten).map(key => color(`${key}`, 'white')).join(' ')}` : commitTitle;
+    spinner.start(title);
     argv.gitFilterRepo
       ? await gitFilterRepo(sha, name, argv, entity)
       : await filter(argv, cmd || value);
