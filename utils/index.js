@@ -15,54 +15,76 @@ const colors = {
   reset: '\x1b[0m',
 };
 
+function logo() {
+  return `  [38;2;247;104;31m [39m[38;2;251;92;40m [39m[38;2;253;80;50m [39m[38;2;254;68;60m [39m[38;2;254;57;71m [39m[38;2;253;47;83m [39m[38;2;250;38;95m [39m[38;2;246;29;107m [39m[38;2;241;22;120m [39m[38;2;235;15;132m [39m[38;2;228;10;145m [39m[38;2;219;6;158m [39m[38;2;210;3;170m [39m[38;2;200;1;182m_[39m[38;2;189;1;193m [39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m [39m[38;2;141;11;230m [39m[38;2;129;17;237m [39m[38;2;116;24;243m [39m[38;2;103;32;248m [39m[38;2;91;40;251m [39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m [39m[38;2;46;83;253m [39m[38;2;37;95;250m [39m[38;2;29;108;246m [39m[38;2;21;120;241m[39m
+  [38;2;251;92;40m [39m[38;2;253;80;50m_[39m[38;2;254;68;60m_[39m[38;2;254;57;71m_[39m[38;2;253;47;83m [39m[38;2;250;38;95m_[39m[38;2;246;29;107m_[39m[38;2;241;22;120m_[39m[38;2;235;15;132m [39m[38;2;228;10;145m_[39m[38;2;219;6;158m_[39m[38;2;210;3;170m_[39m[38;2;200;1;182m|[39m[38;2;189;1;193m [39m[38;2;178;1;203m|[39m[38;2;166;3;213m_[39m[38;2;154;7;222m [39m[38;2;141;11;230m_[39m[38;2;129;17;237m_[39m[38;2;116;24;243m_[39m[38;2;103;32;248m [39m[38;2;91;40;251m_[39m[38;2;79;50;253m_[39m[38;2;68;61;254m_[39m[38;2;57;72;254m [39m[38;2;46;83;253m_[39m[38;2;37;95;250m [39m[38;2;29;108;246m_[39m[38;2;21;120;241m [39m[38;2;15;133;235m[39m
+  [38;2;253;80;50m|[39m[38;2;254;68;60m [39m[38;2;254;57;71m [39m[38;2;253;47;83m_[39m[38;2;250;38;95m|[39m[38;2;246;29;107m [39m[38;2;241;22;120m-[39m[38;2;235;15;132m_[39m[38;2;228;10;145m|[39m[38;2;219;6;158m_[39m[38;2;210;3;170m [39m[38;2;200;1;182m-[39m[38;2;189;1;193m|[39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m_[39m[38;2;141;11;230m|[39m[38;2;129;17;237m [39m[38;2;116;24;243m.[39m[38;2;103;32;248m [39m[38;2;91;40;251m|[39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m_[39m[38;2;46;83;253m|[39m[38;2;37;95;250m [39m[38;2;29;108;246m|[39m[38;2;21;120;241m [39m[38;2;15;133;235m|[39m[38;2;10;146;227m[39m
+  [38;2;254;68;60m|[39m[38;2;254;57;71m_[39m[38;2;253;47;83m|[39m[38;2;250;38;95m [39m[38;2;246;29;107m|[39m[38;2;241;22;120m_[39m[38;2;235;15;132m_[39m[38;2;228;10;145m_[39m[38;2;219;6;158m|[39m[38;2;210;3;170m_[39m[38;2;200;1;182m_[39m[38;2;189;1;193m_[39m[38;2;178;1;203m|[39m[38;2;166;3;213m_[39m[38;2;154;7;222m|[39m[38;2;141;11;230m [39m[38;2;129;17;237m|[39m[38;2;116;24;243m_[39m[38;2;103;32;248m_[39m[38;2;91;40;251m_[39m[38;2;79;50;253m|[39m[38;2;68;61;254m_[39m[38;2;57;72;254m|[39m[38;2;46;83;253m [39m[38;2;37;95;250m|[39m[38;2;29;108;246m_[39m[38;2;21;120;241m [39m[38;2;15;133;235m [39m[38;2;10;146;227m|[39m[38;2;5;158;219m[39m
+  [38;2;254;57;71m [39m[38;2;253;47;83m [39m[38;2;250;38;95m [39m[38;2;246;29;107m [39m[38;2;241;22;120m [39m[38;2;235;15;132m [39m[38;2;228;10;145m [39m[38;2;219;6;158m [39m[38;2;210;3;170m [39m[38;2;200;1;182m [39m[38;2;189;1;193m [39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m [39m[38;2;141;11;230m [39m[38;2;129;17;237m [39m[38;2;116;24;243m [39m[38;2;103;32;248m [39m[38;2;91;40;251m [39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m [39m[38;2;46;83;253m [39m[38;2;37;95;250m [39m[38;2;29;108;246m|[39m[38;2;21;120;241m_[39m[38;2;15;133;235m_[39m[38;2;10;146;227m_[39m[38;2;5;158;219m|[39m[38;2;3;170;210m[39m
+  [38;2;253;47;83m[39m
+  `;
+}
+
+function footer(length, runTime) {
+  return (
+    color('\n  restory rewrote ', 'green') +
+    color(length, 'whiteBold') +
+    color(' commits', 'green') +
+    color(` in `, 'green') +
+    color(`${runTime}s`, 'dim')
+  );
+}
+
 function color(msg, color) {
   return `${colors[color] || color}${msg}${colors.reset}`;
 }
 
-const space = (num = 4) => ' '.repeat(num);
+function space(num = 4) {
+  return ' '.repeat(num);
+}
 
-const baseCmd = (sha, safe) => `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''} --commit-callback '
+function baseCmd(sha, safe) {
+  return `${__dirname}/git-filter-repo/git-filter-repo.py -f ${
+    safe ? '--safe' : ''
+  } --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
+}
+
+function output(output, name, subject, value) {
+  return subject
+    ? `commit.${name} = b"${output.replace(subject, value)}"`
+    : `commit.${name} = b"${value}"`;
+}
 
 function getOperand({ entity, name, argv }) {
-  const {subject, value, rewritten} = argv;
-  const output = (output, name, subject, value) => {
-    return subject ? `commit.${name} = b"${output.replace(subject, value)}"` : `commit.${name} = b"${value}"` 
-  };
+  const { subject, value, rewritten } = argv;
   if (rewritten) {
-    const result = Object.keys(rewritten).map(key => {
-      const {index, value} = rewritten[key]
-      const [...stdout] = entity.split('--');
-      const stdoutValue = stdout[index];
-      return output(stdoutValue, key, rewritten[key].key || key, value);
-    }).join(`\n${space()}`);
-    return result;
+    return Object.keys(rewritten)
+      .map((key) => {
+        const { index, value } = rewritten[key];
+        const [...stdout] = entity.split('--');
+        const stdoutValue = stdout[index];
+        const subject = rewritten[key].key;
+        if (subject) {
+          return output(stdoutValue, key, value, subject);
+        } else {
+          return output(stdoutValue, key, subject, value);
+        }
+      })
+      .join(`\n${space()}`);
   }
   return output(entity, name, subject, value);
 }
 
-async function gitFilterRepo(
-  sha,
-  name,
-  argv,
-  entity
-) {
-  const { committer,  safe } = argv;
-  const operand = getOperand({
-    entity,
-    name,
-    argv
-  });
+async function gitFilterRepo(sha, name, argv, entity) {
+  const { committer, safe } = argv;
+  const operand = getOperand({ entity, name, argv });
   const baseScript = `${baseCmd(sha, safe)}${space()}${operand}`;
-  const script = committer
-    ? `${baseScript}\n${space()}${getOperand({
-        entity,
-        name: name.replace('author', 'committer'),
-        argv
-      })}'`
-    : `${baseScript}'`;
-    console.log(script)
+  const script =
+    committer && operand.includes('author')
+      ? `${baseScript}\n${space()}${operand.replace(/author/g, 'committer')}'`
+      : `${baseScript}'`;
   await execute(script);
 }
 
@@ -93,20 +115,13 @@ async function command({
   // TODOs
   // - don't run when replace value is same as stdout
   // - show pre-run info
-  // - add rewrite api
   const start = Date.now();
-  const args = {};
-  if (argv.rewritten) {
-    Object.assign(args, argv.rewritten);
-  } else {
-    const { subject, value } = argv;
-    Object.assign(args, {subject, value});
-  }
-  
+  const args = argv.rewritten || { subject: argv.subject, value: argv.value };
+
   for (const sha of commits) {
     const { subject, value } = args;
     const { stdout } = await execute(`${script} ${sha}`, {
-      maxBuffer: 100000 * 100000,
+      maxBuffer: 10000 * 10000,
     });
     const entity = stdout.trim();
     const spinner = ora({ indent: 2 });
@@ -120,10 +135,11 @@ async function command({
         cmd = `${gitCmd}="${input}"`;
       }
     }
-    const commitTitle = `${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${color(
-      name,
-      'white'
-    )} ${color(
+    const baseTitle = `${color('rewriting', 'white')} ${color(
+      shortSha,
+      'blue'
+    )}`;
+    const defaultTitle = `${baseTitle} ${color(name, 'white')} ${color(
       `${entity.replace(
         subject,
         `${colors.underline}${subject}${colors.dim}`
@@ -131,7 +147,12 @@ async function command({
       'dim'
     )} ${color('to', 'white')} ${color(value, 'magenta')}`;
 
-    const title = argv.rewritten ? `rewriting ${color('rewriting', 'white')} ${color(shortSha, 'blue')} ${Object.keys(argv.rewritten).map(key => color(`${key}`, 'white')).join(' ')}` : commitTitle;
+    const title = argv.rewritten
+      ? `${baseTitle} ${Object.keys(argv.rewritten)
+          .map((key) => color(`${key.replace('author_', '')}`, 'dim'))
+          .join(' ')}`
+      : defaultTitle;
+
     spinner.start(title);
     argv.gitFilterRepo
       ? await gitFilterRepo(sha, name, argv, entity)
@@ -139,36 +160,7 @@ async function command({
     spinner.succeed();
   }
   const runTime = (Date.now() - start) / 1000;
-  console.log(
-    color('\n  restory rewrote ', 'green') +
-      color(commits.length, 'whiteBold') +
-      color(' commits', 'green') +
-      color(` in `, 'green') +
-      color(`${runTime}s`, 'dim')
-  );
-}
-
-function logo() {
-  return `  [38;2;247;104;31m [39m[38;2;251;92;40m [39m[38;2;253;80;50m [39m[38;2;254;68;60m [39m[38;2;254;57;71m [39m[38;2;253;47;83m [39m[38;2;250;38;95m [39m[38;2;246;29;107m [39m[38;2;241;22;120m [39m[38;2;235;15;132m [39m[38;2;228;10;145m [39m[38;2;219;6;158m [39m[38;2;210;3;170m [39m[38;2;200;1;182m_[39m[38;2;189;1;193m [39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m [39m[38;2;141;11;230m [39m[38;2;129;17;237m [39m[38;2;116;24;243m [39m[38;2;103;32;248m [39m[38;2;91;40;251m [39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m [39m[38;2;46;83;253m [39m[38;2;37;95;250m [39m[38;2;29;108;246m [39m[38;2;21;120;241m[39m
-  [38;2;251;92;40m [39m[38;2;253;80;50m_[39m[38;2;254;68;60m_[39m[38;2;254;57;71m_[39m[38;2;253;47;83m [39m[38;2;250;38;95m_[39m[38;2;246;29;107m_[39m[38;2;241;22;120m_[39m[38;2;235;15;132m [39m[38;2;228;10;145m_[39m[38;2;219;6;158m_[39m[38;2;210;3;170m_[39m[38;2;200;1;182m|[39m[38;2;189;1;193m [39m[38;2;178;1;203m|[39m[38;2;166;3;213m_[39m[38;2;154;7;222m [39m[38;2;141;11;230m_[39m[38;2;129;17;237m_[39m[38;2;116;24;243m_[39m[38;2;103;32;248m [39m[38;2;91;40;251m_[39m[38;2;79;50;253m_[39m[38;2;68;61;254m_[39m[38;2;57;72;254m [39m[38;2;46;83;253m_[39m[38;2;37;95;250m [39m[38;2;29;108;246m_[39m[38;2;21;120;241m [39m[38;2;15;133;235m[39m
-  [38;2;253;80;50m|[39m[38;2;254;68;60m [39m[38;2;254;57;71m [39m[38;2;253;47;83m_[39m[38;2;250;38;95m|[39m[38;2;246;29;107m [39m[38;2;241;22;120m-[39m[38;2;235;15;132m_[39m[38;2;228;10;145m|[39m[38;2;219;6;158m_[39m[38;2;210;3;170m [39m[38;2;200;1;182m-[39m[38;2;189;1;193m|[39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m_[39m[38;2;141;11;230m|[39m[38;2;129;17;237m [39m[38;2;116;24;243m.[39m[38;2;103;32;248m [39m[38;2;91;40;251m|[39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m_[39m[38;2;46;83;253m|[39m[38;2;37;95;250m [39m[38;2;29;108;246m|[39m[38;2;21;120;241m [39m[38;2;15;133;235m|[39m[38;2;10;146;227m[39m
-  [38;2;254;68;60m|[39m[38;2;254;57;71m_[39m[38;2;253;47;83m|[39m[38;2;250;38;95m [39m[38;2;246;29;107m|[39m[38;2;241;22;120m_[39m[38;2;235;15;132m_[39m[38;2;228;10;145m_[39m[38;2;219;6;158m|[39m[38;2;210;3;170m_[39m[38;2;200;1;182m_[39m[38;2;189;1;193m_[39m[38;2;178;1;203m|[39m[38;2;166;3;213m_[39m[38;2;154;7;222m|[39m[38;2;141;11;230m [39m[38;2;129;17;237m|[39m[38;2;116;24;243m_[39m[38;2;103;32;248m_[39m[38;2;91;40;251m_[39m[38;2;79;50;253m|[39m[38;2;68;61;254m_[39m[38;2;57;72;254m|[39m[38;2;46;83;253m [39m[38;2;37;95;250m|[39m[38;2;29;108;246m_[39m[38;2;21;120;241m [39m[38;2;15;133;235m [39m[38;2;10;146;227m|[39m[38;2;5;158;219m[39m
-  [38;2;254;57;71m [39m[38;2;253;47;83m [39m[38;2;250;38;95m [39m[38;2;246;29;107m [39m[38;2;241;22;120m [39m[38;2;235;15;132m [39m[38;2;228;10;145m [39m[38;2;219;6;158m [39m[38;2;210;3;170m [39m[38;2;200;1;182m [39m[38;2;189;1;193m [39m[38;2;178;1;203m [39m[38;2;166;3;213m [39m[38;2;154;7;222m [39m[38;2;141;11;230m [39m[38;2;129;17;237m [39m[38;2;116;24;243m [39m[38;2;103;32;248m [39m[38;2;91;40;251m [39m[38;2;79;50;253m [39m[38;2;68;61;254m [39m[38;2;57;72;254m [39m[38;2;46;83;253m [39m[38;2;37;95;250m [39m[38;2;29;108;246m|[39m[38;2;21;120;241m_[39m[38;2;15;133;235m_[39m[38;2;10;146;227m_[39m[38;2;5;158;219m|[39m[38;2;3;170;210m[39m
-  [38;2;253;47;83m[39m
-  `;
+  console.log(footer(commits.length, runTime));
 }
 
 module.exports = { color, execute, filterBranch, command, logo };
-
-// author_name,
-// author_email,
-// author_date,
-// committer_name,
-// committer_email,
-// committer_date,
-// message,
-// file_changes,
-// parents,
-// original_id
-
-// commit.message = "hello" if commit.original_id == "db78265" else commit.message = commit.message
