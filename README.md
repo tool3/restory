@@ -36,6 +36,10 @@ alias `re`
 ## `remsg`
 rewrite commit|s message   
 alias `rm`   
+## `rewrite`
+rewrite multiple commit fields   
+this command is a combination of all of the commands above, and is controlled with flags   
+alias `rm`   
 # options
 ### `sha`
 type: `string`   
@@ -66,13 +70,15 @@ default: `true`
 
 # important usage notes
 ⚠️ ATTENTION! THIS WILL REWRITE YOUR GIT HISTORY! ⚠️    
-use at your own risk
+⚠️ THIS OPERATION CANNOT BE REVERTED! ⚠️    
+⚠️ USE AT YOUR OWN RISK ⚠️
 
 things to know:
+- this version of `git-filter-repo` does **NOT** remove `origin` when done rewriting.
 - every `restory` command recreates the commit|s shas.
 - you need to have a clean working directory.
-- you will have to force push.
-- when run without `--sha || -s` flag - the command will rewrite **ALL** commits with given input.
+- you will have to force push if using the same `origin`.
+- when run without commit filter flag (`-s` || `-n` || `-r` - see [options](#options)) - the command will rewrite **ALL** commits with given input.
 
 # examples
 ## `ls`
@@ -130,4 +136,19 @@ restory remsg 'this is the new commit msg' -s '620a83b'
 rewrite `Moon` to `Mun` in all commit messages 
 ```bash
 restory remsg 'Moon' 'Mun'
+```
+
+## `rewrite`
+rewrite commit message and replace date year `1987` to `1988` for the last 3 commits
+```bash
+restory rewrite -m 'this is the new commit msg' -d '1987' '1988' -n 3
+```
+rewrite `Moon` to `Mun` in all commit messages 
+```bash
+restory rewrite -m 'Moon' 'Mun'
+```
+
+rewrite commit message, replace `t` to `z` in author name and set email to `new_value@world.com` in a range of commits
+```bash
+restory rewrite -m 'new message' -a 't' 'z' -e 'new_value@world.com' -r '8381e6a' '4110655'
 ```
