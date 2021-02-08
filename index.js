@@ -140,23 +140,23 @@ yargs
         description: 'commit message or subject to replace and value',
         type: 'array'
       },
-      date: {
+      author_date: {
         alias: 'd',
         description: 'author date or subject to replace and value',
         type: 'array'
       },
-      author: {
+      author_name: {
         alias: 'a',
         description: 'author name or subject to replace and value',
         type: 'array'
       },
-      email: {
+      author_email: {
         alias: 'e',
         description: 'author email or subject to replace and value',
         type: 'array',
       }
     },
-    async (argv) => {
+    async argv => {
       try {
         await rewrite(argv);
       } catch (error) {
