@@ -7,6 +7,7 @@ const redate = require('./commands/redate');
 const reauthor = require('./commands/reauthor');
 const remail = require('./commands/remail');
 const remsg = require('./commands/remsg');
+const rewrite = require('./commands/rewrite');
 
 yargs
   .config({})
@@ -120,6 +121,44 @@ yargs
     async (argv) => {
       try {
         await remsg(argv);
+      } catch (error) {
+        throw color(error.message, 'red');
+      }
+    }
+  )
+  .command(
+    ['rewrite', 'rw'],
+    'rewrite multiple commit fields',
+    {
+      script: {
+        description: 'list commit script',
+        type: 'string',
+        default: 'git log --format=format:%h',
+      },
+      message: {
+        alias: 'm',
+        description: 'commit message or subject to replace and value',
+        type: 'array'
+      },
+      date: {
+        alias: 'd',
+        description: 'author date or subject to replace and value',
+        type: 'array'
+      },
+      author: {
+        alias: 'a',
+        description: 'author name or subject to replace and value',
+        type: 'array'
+      },
+      email: {
+        alias: 'e',
+        description: 'author email or subject to replace and value',
+        type: 'array',
+      }
+    },
+    async (argv) => {
+      try {
+        await rewrite(argv);
       } catch (error) {
         throw color(error.message, 'red');
       }
