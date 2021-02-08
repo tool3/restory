@@ -57,13 +57,13 @@ function output(output, name, subject, value) {
     : `commit.${name} = b"${value}"`;
 }
 
-function getOperand({ entity, name, argv }) {
+function getOperand({ gitOutput, name, argv }) {
   const { subject, value, rewritten } = argv;
   if (rewritten) {
     return Object.keys(rewritten)
       .map((key) => {
         const { index, value } = rewritten[key];
-        const [...stdout] = entity.split('--');
+        const [...stdout] = gitOutput.split('--');
         const stdoutValue = stdout[index];
         const subject = rewritten[key].key;
         if (subject) {
@@ -74,12 +74,12 @@ function getOperand({ entity, name, argv }) {
       })
       .join(`\n${space()}`);
   }
-  return output(entity, name, subject, value);
+  return output(gitOutput, name, subject, value);
 }
 
-async function gitFilterRepo(sha, name, argv, entity) {
+async function gitFilterRepo(sha, name, argv, gitOutput) {
   const { committer, safe } = argv;
-  const operand = getOperand({ entity, name, argv });
+  const operand = getOperand({ gitOutput, name, argv });
   const baseScript = `${baseCmd(sha, safe)}${space()}${operand}`;
   const script =
     committer && operand.includes('author')
@@ -104,17 +104,7 @@ async function filterBranch(argv, cmd) {
   await execute(script, { maxBuffer: 100000 * 100000 });
 }
 
-async function command({
-  filter = filterBranch,
-  argv,
-  script,
-  name,
-  gitCmd,
-  commits,
-}) {
-  // TODOs
-  // - don't run when replace value is same as stdout
-  // - show pre-run info
+async function command({ filter = filterBranch, argv, script, name, gitCmd, commits}) {
   const start = Date.now();
   const args = argv.rewritten || { subject: argv.subject, value: argv.value };
 
@@ -123,10 +113,10 @@ async function command({
     const { stdout } = await execute(`${script} ${sha}`, {
       maxBuffer: 10000 * 10000,
     });
-    const entity = stdout.trim();
+    const output = stdout.trim();
     const spinner = ora({ indent: 2 });
     const shortSha = sha.slice(0, 7);
-    const input = subject ? entity.replace(subject, value) : value;
+    const input = subject ? output.replace(subject, value) : value;
     let cmd = '';
     if (gitCmd) {
       if (Array.isArray(gitCmd)) {
@@ -140,7 +130,7 @@ async function command({
       'blue'
     )}`;
     const defaultTitle = `${baseTitle} ${color(name, 'white')} ${color(
-      `${entity.replace(
+      `${output.replace(
         subject,
         `${colors.underline}${subject}${colors.dim}`
       )}`,
@@ -155,7 +145,7 @@ async function command({
 
     spinner.start(title);
     argv.gitFilterRepo
-      ? await gitFilterRepo(sha, name, argv, entity)
+      ? await gitFilterRepo(sha, name, argv, output)
       : await filter(argv, cmd || value);
     spinner.succeed();
   }
