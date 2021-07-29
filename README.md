@@ -1,4 +1,7 @@
-![](./restory.png)   
+<img src="./restory.svg" width=100 />   
+
+# restory 
+
 re~~write git his~~tory
 
 # install
