@@ -198,6 +198,12 @@ yargs
     default: true,
     description: 'use git filter-repo instead of filter-branch',
   })
+  .options('truncate', {
+    alias: 't',
+    type: 'boolean',
+    default: false,
+    description: 'truncate output to fixed width columns',
+  })
   .demandCommand(1)
   .help()
-  .wrap(100).argv;
+  .wrap(yargs.terminalWidth()).argv;

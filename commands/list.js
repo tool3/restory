@@ -18,7 +18,12 @@ async function list(argv) {
         },
       }
     : undefined;
-  const t = new table({ style: { head: [], border: [] }, ...chars });
+  
+  const tableOptions = { style: { head: [], border: [] }, ...chars  };
+  if (argv.truncate) {
+    tableOptions.colWidths = [12, 50, 33, 17, 30] 
+  }
+  const t = new table(tableOptions);
   t.push([
     { content: color('SHA', 'whiteBold'), hAlign: 'center' },
     { content: color('MESSAGE', 'whiteBold'), hAlign: 'center' },
@@ -29,9 +34,9 @@ async function list(argv) {
   for (commit of commits) {
     const formattedCommit = commit.split('  ');
     t.push([
-      color(formattedCommit[0], 'blue'),
-      color(formattedCommit[1], 'cyan'),
-      color(formattedCommit[2], 'magenta'),
+      { content: color(formattedCommit[0], 'blue'), hAlign: 'center'},
+      {content: color(formattedCommit[1], 'cyan') },
+      {content: color(formattedCommit[2], 'magenta') },
       { content: color(formattedCommit[3], 'yellow'), hAlign: 'center' },
       { content: color(formattedCommit[4], 'green'), hAlign: 'center' },
     ]);
