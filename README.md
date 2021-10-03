@@ -1,8 +1,4 @@
-<img src="./restory.svg" width=100 />   
-
-# restory 
-
-re~~write git his~~tory
+<img src="./shellfies/logo.png" />   
 
 # install
 ```bash
@@ -89,7 +85,8 @@ list all commits
 ```bash
 restory ls
 ```
-![](./ls.png)   
+<img src="./shellfies/ls.png" />
+
 [![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
 
 list last 5 commits
