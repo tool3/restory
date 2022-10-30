@@ -201,7 +201,7 @@ yargs
   .options('truncate', {
     alias: 't',
     type: 'boolean',
-    default: false,
+    default: true,
     description: 'truncate output to fixed width columns',
   })
   .demandCommand(1)
