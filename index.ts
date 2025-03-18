@@ -210,7 +210,7 @@ yargs
   .options('quiet', {
     alias: 'q',
     type: 'boolean',
-    default: true,
+    default: false,
     description: 'don\'t log every commit change',
   })
   .demandCommand(1)
