@@ -207,6 +207,12 @@ yargs
     default: true,
     description: 'truncate output to fixed width columns',
   })
+  .options('quiet', {
+    alias: 'q',
+    type: 'boolean',
+    default: true,
+    description: 'don\'t log every commit change',
+  })
   .demandCommand(1)
   .help()
   .wrap(yargs.terminalWidth()).argv;

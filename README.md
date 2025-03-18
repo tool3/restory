@@ -1,5 +1,9 @@
 <img src="./shellfies/logo.png" />   
 
+# restory 2.0
+✅ Rewritten in TypeScript.   
+✅ Added quiet mode.   
+
 # install
 ```bash
 yarn add @tool3/restory -g

@@ -135,7 +135,7 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
   const spinner = ora({ indent: 2 });
 
   const generalTitle = color('rewriting ', 'white') + color(commits.length.toFixed() + ' ', 'dim') + color('commits', 'white');
-  if (argv.silent) spinner.start(generalTitle);
+  if (argv.quiet) spinner.start(generalTitle);
 
   for (const sha of commits) {
     const { subject, value } = args;
@@ -145,7 +145,7 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
     const output = stdout.trim();
 
     const shortSha = sha.slice(0, 7);
-    if (argv.silent) spinner.text = generalTitle + color(` ${shortSha}`, 'blue');
+    if (argv.quiet) spinner.text = generalTitle + color(` ${shortSha}`, 'blue');
     
     const input = subject ? output.replace(subject as string, value as string) : value;
     let cmd = '';
@@ -175,16 +175,16 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
         .join(' ')}`
       : defaultTitle;
 
-    if (!argv.silent) spinner.start(title);
+    if (!argv.quiet) spinner.start(title);
 
     argv.gitFilterRepo
       ? await gitFilterRepo({ sha, name, argv, gitOutput: output })
       : await filter(argv, cmd || value as string);
 
-    if (!argv.silent) spinner.succeed();
+    if (!argv.quiet) spinner.succeed();
   }
 
-  if (argv.silent) spinner.succeed();
+  if (argv.quiet) spinner.succeed();
 
   const runTime = (Date.now() - start) / 1000;
   console.log(footer(commits.length, runTime));
