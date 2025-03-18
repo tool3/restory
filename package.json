@@ -3,6 +3,10 @@
   "version": "1.4.8",
   "description": "rewrite git history",
   "main": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
   "bin": {
     "restory": "dist/index.js"
   },
