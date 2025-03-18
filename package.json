@@ -2,12 +2,12 @@
   "name": "@tool3/restory",
   "version": "1.4.8",
   "description": "rewrite git history",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
-    "restory": "index.js"
+    "restory": "dist/index.js"
   },
   "scripts": {
-    "test": "echo 'no tests'"
+    "build": "tsc"
   },
   "keywords": [
     "cli",
@@ -21,5 +21,9 @@
     "ora": "^5.3.0",
     "yargs": "^16.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/yargs": "^17.0.33",
+    "typescript": "^5.8.2"
+  }
 }

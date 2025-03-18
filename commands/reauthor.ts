@@ -1,7 +1,8 @@
-const { command } = require('../utils');
-const { listCommits } = require('./list');
+import { command } from '../utils';
+import { Argv } from '../utils/types';
+import { listCommits } from './list';
 
-async function reauthor(argv) {
+async function reauthor(argv: Argv): Promise<void> {
   const { sha } = argv;
   const commits = sha ? [sha] : await listCommits(argv);
 
@@ -14,4 +15,4 @@ async function reauthor(argv) {
   });
 }
 
-module.exports = reauthor;
+export default reauthor;

@@ -1,12 +1,13 @@
-const table = require('cli-table3');
-const { color, execute } = require('../utils');
+import table from 'cli-table3';
+import { color, execute } from '../utils';
+import { Argv } from '../utils/types';
 
-async function listCommits({ script }) {
-  const { stdout } = await execute(script, { maxBuffer: 10000 * 10000 });
+async function listCommits({ script }: Argv): Promise<string[]> {
+  const { stdout } = await execute(script!, { maxBuffer: 10000 * 10000 });
   return stdout.trim().split('\n');
 }
 
-async function list(argv) {
+async function list(argv: Argv): Promise<void> {
   const commits = await listCommits(argv);
   const chars = argv.compact
     ? {
@@ -19,13 +20,13 @@ async function list(argv) {
       }
     : undefined;
 
-  const tableOptions = { style: { head: [], border: [] }, ...chars };
+  const tableOptions: any = { style: { head: [], border: [] }, ...chars };
   if (argv.truncate) {
     tableOptions.colWidths = [12, 50, 33, 17, 30];
   }
   const t = new table(tableOptions);
   t.push([
-    { content: color('SHA', 'whiteBold'), hAlign: 'center', },
+    { content: color('SHA', 'whiteBold'), hAlign: 'center' },
     { content: color('MESSAGE', 'whiteBold'), hAlign: 'center' },
     { content: color('DATE', 'whiteBold'), hAlign: 'center' },
     { content: color('AUTHOR', 'whiteBold'), hAlign: 'center' },
@@ -44,4 +45,4 @@ async function list(argv) {
   console.log(t.toString());
 }
 
-module.exports = { list, listCommits };
+export { list, listCommits };
