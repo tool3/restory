@@ -40,14 +40,14 @@ things to know:
 every command in `restory` can either set a new value or replace an existing value.  
 `restory <cmd> [optional-subject-to-replace] <value>`  
 see more details for each command [below](#commands)  
-| Command | Description | Alias |
-|-----------|-------------------------------------------------------------------------------------------------------|-------|
-| `list` | list all commits | `ls` |
-| `redate` | rewrite commit(s) date | `rd` |
-| `reauthor`| rewrite commit(s) author name | `ra` |
-| `remail` | rewrite commit(s) author email | `re` |
-| `remsg` | rewrite commit(s) message | `rm` |
-| `rewrite` | rewrite multiple commit fields. This command is a combination of all of the commands above, and is controlled with flags | `rw` |
+| Command  | Alias | Description |
+|----------|-------|-------------------------------------------------------------------------------------------------------|
+| `list`   | `ls`  | list all commits |
+| `redate` | `rd`  | rewrite commit(s) date |
+| `reauthor`| `ra` | rewrite commit(s) author name |
+| `remail` | `re`  | rewrite commit(s) author email |
+| `remsg`  | `rm`  | rewrite commit(s) message |
+| `rewrite`| `rw`  | rewrite multiple commit fields. This command is a combination of all of the commands above, and is controlled with flags |
 
 # options
 
