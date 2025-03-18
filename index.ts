@@ -1,13 +1,16 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs');
-const { color, logo } = require('./utils');
-const { list } = require('./commands/list');
-const redate = require('./commands/redate');
-const reauthor = require('./commands/reauthor');
-const remail = require('./commands/remail');
-const remsg = require('./commands/remsg');
-const rewrite = require('./commands/rewrite');
+import yargs from 'yargs';
+import { color, logo } from './utils';
+import { list } from './commands/list';
+import redate from './commands/redate';
+import reauthor from './commands/reauthor';
+import remail from './commands/remail';
+import remsg from './commands/remsg';
+import rewrite from './commands/rewrite';
+import { Argv } from './utils/types';
+
+
 
 yargs
   .config({})
@@ -15,7 +18,7 @@ yargs
   .middleware(() => console.log(logo().trimEnd()))
   .updateStrings({ 'Commands:': '\x1b[97m commands\x1b[0m' })
   .updateStrings({ 'Options:': '\x1b[97m options\x1b[0m' })
-  .middleware((argv) => {
+  .middleware((argv: any) => {
     if (argv.number) {
       argv.script = `${argv.script} -n ${argv.number}`;
     }
@@ -46,7 +49,7 @@ yargs
         default: `git log --pretty=oneline --format='%h  %s  %cd  %an  %ae'`,
       },
     },
-    async (argv) => {
+    async (argv: Argv) => {
       try {
         await list(argv);
       } catch (error) {
@@ -64,7 +67,7 @@ yargs
         default: 'git log --format=format:%h',
       },
     },
-    async (argv) => {
+    async (argv: Argv) => {
       try {
         await redate(argv);
       } catch (error) {
@@ -82,7 +85,7 @@ yargs
         default: 'git log --format=format:%h',
       },
     },
-    async (argv) => {
+    async (argv: Argv) => {
       try {
         await reauthor(argv);
       } catch (error) {
@@ -100,7 +103,7 @@ yargs
         default: 'git log --format=format:%h',
       },
     },
-    async (argv) => {
+    async (argv: Argv) => {
       try {
         await remail(argv);
       } catch (error) {
@@ -118,7 +121,7 @@ yargs
         default: 'git log --format=format:%h',
       },
     },
-    async (argv) => {
+    async (argv: Argv) => {
       try {
         await remsg(argv);
       } catch (error) {
@@ -156,7 +159,7 @@ yargs
         type: 'array',
       }
     },
-    async argv => {
+    async (argv: any) => {
       try {
         await rewrite(argv);
       } catch (error) {
