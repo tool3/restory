@@ -204,8 +204,8 @@ yargs
   .options('truncate', {
     alias: 't',
     type: 'boolean',
-    default: true,
-    description: 'truncate output to fixed width columns',
+    default: false,
+    description: 'truncate output to minimum column width',
   })
   .options('quiet', {
     alias: 'q',
