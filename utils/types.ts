@@ -11,6 +11,7 @@ interface Argv {
     gitFilterRepo?: boolean;
     truncate?: boolean;
     message?: string[];
+    silent?: boolean;
     rewritten?: Record<string, { subject: string; value: string; index: number }>;
     author_date?: string[];
     author_name?: string[];

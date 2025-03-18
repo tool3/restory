@@ -48,9 +48,8 @@ function space(num = 4): string {
 }
 
 function baseCmd(sha: string, safe: boolean): string {
-  return `${__dirname}/git-filter-repo/git-filter-repo.py -f ${
-    safe ? '--safe' : ''
-  } --commit-callback '
+  return `${__dirname}/git-filter-repo/git-filter-repo.py -f ${safe ? '--safe' : ''
+    } --commit-callback '
   ${sha ? `if (commit.original_id[:7] == b"${sha}"):` : ''}
 `;
 }
@@ -133,6 +132,10 @@ interface CommandArgs {
 async function command({ filter = filterBranch, argv, script, name, gitCmd, commits }: CommandArgs): Promise<void> {
   const start = Date.now();
   const args = argv.rewritten || { subject: argv.subject, value: argv.value };
+  const spinner = ora({ indent: 2 });
+
+  const generalTitle = color('rewriting ', 'white') + color(commits.length.toFixed() + ' ', 'dim') + color('commits', 'white');
+  if (argv.silent) spinner.start(generalTitle);
 
   for (const sha of commits) {
     const { subject, value } = args;
@@ -140,8 +143,10 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
       maxBuffer: 10000 * 10000,
     });
     const output = stdout.trim();
-    const spinner = ora({ indent: 2 });
+
     const shortSha = sha.slice(0, 7);
+    if (argv.silent) spinner.text = generalTitle + color(` ${shortSha}`, 'blue');
+    
     const input = subject ? output.replace(subject as string, value as string) : value;
     let cmd = '';
     if (gitCmd) {
@@ -155,6 +160,7 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
       shortSha,
       'blue'
     )}`;
+
     const defaultTitle = `${baseTitle} ${color(name, 'white')} ${color(
       `${output.replace(
         subject as string,
@@ -165,16 +171,21 @@ async function command({ filter = filterBranch, argv, script, name, gitCmd, comm
 
     const title = argv.rewritten
       ? `${baseTitle} ${Object.keys(argv.rewritten)
-          .map((key) => color(`${key.replace('author_', '')}`, 'dim'))
-          .join(' ')}`
+        .map((key) => color(`${key.replace('author_', '')}`, 'dim'))
+        .join(' ')}`
       : defaultTitle;
 
-    spinner.start(title);
+    if (!argv.silent) spinner.start(title);
+
     argv.gitFilterRepo
       ? await gitFilterRepo({ sha, name, argv, gitOutput: output })
       : await filter(argv, cmd || value as string);
-    spinner.succeed();
+
+    if (!argv.silent) spinner.succeed();
   }
+
+  if (argv.silent) spinner.succeed();
+
   const runTime = (Date.now() - start) / 1000;
   console.log(footer(commits.length, runTime));
 }
