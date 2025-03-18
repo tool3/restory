@@ -1,7 +1,8 @@
-const { command } = require('../utils');
-const { listCommits } = require('./list');
+import { command } from '../utils';
+import { Argv } from '../utils/types';
+import { listCommits } from './list';
 
-async function rewrite(argv) {
+async function rewrite(argv: Argv): Promise<void> {
   const { sha, message, author_date, author_name, author_email } = argv;
   const rewritten = { message, author_date, author_name, author_email };
   const exists = Object.values(rewritten);
@@ -15,17 +16,19 @@ async function rewrite(argv) {
   }
 
   const commits = sha ? [sha] : await listCommits(argv);
-  const options = Object.keys(rewritten);
+  const options = Object.keys(rewritten) as Array<keyof typeof rewritten>;
+
   argv.rewritten = options.reduce((acc, key, index) => {
     if (rewritten[key]) {
       acc[key] = {
-        key: rewritten[key][1],
-        value: rewritten[key][0],
+        subject: Array.isArray(rewritten[key]) ? rewritten[key].join(' ') : rewritten[key],
+        value: Array.isArray(rewritten[key]) ? rewritten[key].join(' ') : rewritten[key],
         index,
       };
     }
     return acc;
-  }, {});
+  }, {} as Argv['rewritten']);
+
   await command({
     argv,
     script: `git show --no-patch --no-notes --pretty="%s--%cd--%an--%ae"`,
@@ -34,4 +37,4 @@ async function rewrite(argv) {
   });
 }
 
-module.exports = rewrite;
+export default rewrite;
