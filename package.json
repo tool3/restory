@@ -11,7 +11,7 @@
     "restory": "dist/index.js"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc && cp -r utils/git-filter-repo dist/utils"
   },
   "keywords": [
     "cli",
