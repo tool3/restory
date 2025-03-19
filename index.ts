@@ -15,7 +15,9 @@ import { Argv } from './utils/types';
 yargs
   .config({})
   .usage(`${logo()}restory <command> [args] [options]`)
-  .middleware(() => console.log(logo().trimEnd()))
+  .middleware((argv: any) => {
+    argv.logo ? console.log(logo().trimEnd()) : ''
+  })
   .updateStrings({ 'Commands:': '\x1b[97m commands\x1b[0m' })
   .updateStrings({ 'Options:': '\x1b[97m options\x1b[0m' })
   .middleware((argv: any) => {
@@ -51,7 +53,7 @@ yargs
     },
     async (argv: Argv) => {
       try {
-        await list(argv); 
+        await list(argv);
       } catch (error) {
         throw color(error.message, 'red');
       }
@@ -212,6 +214,12 @@ yargs
     type: 'boolean',
     default: false,
     description: 'don\'t log every commit change',
+  })
+  .options('logo', {
+    alias: 'l',
+    type: 'boolean',
+    default: true,
+    description: 'print logo',
   })
   .demandCommand(1)
   .help()

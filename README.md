@@ -54,10 +54,11 @@ see more details for each command [below](#commands)
 | Option            | Alias | Description                                                                                                                                                 | Default         |
 | ----------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
 | `sha`             | `s`   | rewrite a specific commit sha.                                                                                                                              |                 |
-| `quiet`           | `q`   | don't log every commit change.                                                                                                                              |                 |
-| `safe`            | `S`   | remove origin when done rewriting.                                                                                                                          |                 |
+| `quiet`           | `q`   | don't log every commit change.                                                                                                                              | `false`         |
+| `safe`            | `S`   | remove origin when done rewriting.                                                                                                                          | `false`         |
 | `range`           | `r`   | range of commits to operate on.                                                                                                                             |                 |
-| `ellipsis`        | `e`   | truncate output to minimum width.                                                                                                                           |                 |
+| `ellipsis`        | `e`   | truncate output to minimum width.                                                                                                                           | `true`          |
+| `logo`            | `l`   | print logo.                                                                                                                                                 | `true`          |
 | `number`          | `n`   | number of commits.                                                                                                                                          | 0 (all commits) |
 | `committer`       | `c`   | include committer fields. For example: `author_date` will also include `committer_date` in the rewrite.                                                     | `true`          |
 | `git-filter-repo` | `g`   | use [`git filter-repo`](https://github.com/newren/git-filter-repo) instead of `git filter-branch`. This method is extremely fast compared to filter-branch. | `true`          |
@@ -89,6 +90,7 @@ restory ls -r 'c884ca6' '0b4be21'
 ```
 
 ## `redate`
+
 rewrite all commits that has `2021` to year to `1984`
 
 ```bash
@@ -108,11 +110,12 @@ restory redate "$(echo `date`)" -n 5
 ```
 
 ## `reauthor`
+
 rewrite all commit author names to `The Devil`
+
 > [!CAUTION]
 > IMPERSONATION IS STRICTLY PROHIBITED!  
-> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
-
+> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!
 
 ```bash
 restory reauthor 'The Devil'
@@ -125,10 +128,12 @@ restory reauthor 'Jebediah Kerman' -n 5
 ```
 
 ## `remail`
+
 rewrite all commit author and committer email to `thedevil@666.com`
+
 > [!CAUTION]
 > IMPERSONATION IS STRICTLY PROHIBITED!  
-> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
+> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!
 
 ```bash
 restory remail 'thedevil@666.com'

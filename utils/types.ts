@@ -12,6 +12,7 @@ interface Argv {
     ellipsis?: boolean;
     message?: string[];
     quiet?: boolean;
+    logo?: boolean;
     rewritten?: Record<string, { subject: string; value: string; index: number }>;
     author_date?: string[];
     author_name?: string[];
