@@ -51,7 +51,7 @@ yargs
     },
     async (argv: Argv) => {
       try {
-        await list(argv);
+        await list(argv); 
       } catch (error) {
         throw color(error.message, 'red');
       }
