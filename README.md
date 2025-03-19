@@ -9,8 +9,8 @@
 ✅ standalone - no 3rd party requirements (git-filter-repo included).
 
 > [!CAUTION]
-> THIS WILL REWRITE YOUR GIT HISTORY!
-> THIS OPERATION CANNOT BE REVERTED!
+> THIS WILL REWRITE YOUR GIT HISTORY!  
+> THIS OPERATION CANNOT BE REVERTED!  
 > USE AT YOUR OWN RISK!
 
 # install
@@ -40,14 +40,14 @@ things to know:
 every command in `restory` can either set a new value or replace an existing value.  
 `restory <cmd> [optional-subject-to-replace] <value>`  
 see more details for each command [below](#commands)  
-| Command  | Alias | Description |
+| Command | Alias | Description |
 |----------|-------|-------------------------------------------------------------------------------------------------------|
-| `list`   | `ls`  | list all commits |
-| `redate` | `rd`  | rewrite commit(s) date |
+| `list` | `ls` | list all commits |
+| `redate` | `rd` | rewrite commit(s) date |
 | `reauthor`| `ra` | rewrite commit(s) author name |
-| `remail` | `re`  | rewrite commit(s) author email |
-| `remsg`  | `rm`  | rewrite commit(s) message |
-| `rewrite`| `rw`  | rewrite multiple commit fields. This command is a combination of all of the commands above, and is controlled with flags |
+| `remail` | `re` | rewrite commit(s) author email |
+| `remsg` | `rm` | rewrite commit(s) message |
+| `rewrite`| `rw` | rewrite multiple commit fields. This command is a combination of all of the commands above, and is controlled with flags |
 
 # options
 
@@ -55,9 +55,9 @@ see more details for each command [below](#commands)
 | ----------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
 | `sha`             | `s`   | rewrite a specific commit sha.                                                                                                                              |                 |
 | `quiet`           | `q`   | don't log every commit change.                                                                                                                              |                 |
-| `safe`           | `S`   | remove origin when done rewriting.                                                                                                                              |                 |
+| `safe`            | `S`   | remove origin when done rewriting.                                                                                                                          |                 |
 | `range`           | `r`   | range of commits to operate on.                                                                                                                             |                 |
-| `truncate`           | `t`   | truncate output to minimum width.                                                                                                                             |                 |
+| `truncate`        | `t`   | truncate output to minimum width.                                                                                                                           |                 |
 | `number`          | `n`   | number of commits.                                                                                                                                          | 0 (all commits) |
 | `committer`       | `c`   | include committer fields. For example: `author_date` will also include `committer_date` in the rewrite.                                                     | `true`          |
 | `git-filter-repo` | `g`   | use [`git filter-repo`](https://github.com/newren/git-filter-repo) instead of `git filter-branch`. This method is extremely fast compared to filter-branch. | `true`          |
@@ -113,7 +113,10 @@ restory redate "$(echo `date`)" -n 5
 
 ## `reauthor`
 
-rewrite all commit author names to `The Devil`
+> [!CAUTION]
+> IMPERSONATION IS STRICTLY PROHIBITED!  
+> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
+> rewrite all commit author names to `The Devil`
 
 ```bash
 restory reauthor 'The Devil'
@@ -127,7 +130,10 @@ restory reauthor 'Jebediah Kerman' -n 5
 
 ## `remail`
 
-rewrite all commit author and committer email to `thedevil@666.com`
+> [!CAUTION]
+> IMPERSONATION IS STRICTLY PROHIBITED!  
+> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
+> rewrite all commit author and committer email to `thedevil@666.com`
 
 ```bash
 restory remail 'thedevil@666.com'
