@@ -21,7 +21,7 @@ async function list(argv: Argv): Promise<void> {
     : undefined;
 
   const tableOptions: any = { style: { head: [], border: [] }, ...chars };
-  if (!argv.truncate) {
+  if (argv.ellipsis) {
     tableOptions.colWidths = [12, 50, 33, 17, 30];
   }
   const t = new table(tableOptions);

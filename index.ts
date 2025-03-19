@@ -201,11 +201,11 @@ yargs
     default: true,
     description: 'use git filter-repo instead of filter-branch',
   })
-  .options('truncate', {
-    alias: 't',
+  .options('ellipsis', {
+    alias: 'e',
     type: 'boolean',
-    default: false,
-    description: 'truncate output to minimum column width',
+    default: true,
+    description: 'truncate output to column width',
   })
   .options('quiet', {
     alias: 'q',

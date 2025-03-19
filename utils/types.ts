@@ -9,7 +9,7 @@ interface Argv {
     safe?: boolean;
     committer?: boolean;
     gitFilterRepo?: boolean;
-    truncate?: boolean;
+    ellipsis?: boolean;
     message?: string[];
     quiet?: boolean;
     rewritten?: Record<string, { subject: string; value: string; index: number }>;

@@ -57,7 +57,7 @@ see more details for each command [below](#commands)
 | `quiet`           | `q`   | don't log every commit change.                                                                                                                              |                 |
 | `safe`            | `S`   | remove origin when done rewriting.                                                                                                                          |                 |
 | `range`           | `r`   | range of commits to operate on.                                                                                                                             |                 |
-| `truncate`        | `t`   | truncate output to minimum width.                                                                                                                           |                 |
+| `ellipsis`        | `e`   | truncate output to minimum width.                                                                                                                           |                 |
 | `number`          | `n`   | number of commits.                                                                                                                                          | 0 (all commits) |
 | `committer`       | `c`   | include committer fields. For example: `author_date` will also include `committer_date` in the rewrite.                                                     | `true`          |
 | `git-filter-repo` | `g`   | use [`git filter-repo`](https://github.com/newren/git-filter-repo) instead of `git filter-branch`. This method is extremely fast compared to filter-branch. | `true`          |
