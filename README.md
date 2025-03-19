@@ -89,15 +89,11 @@ restory ls -r 'c884ca6' '0b4be21'
 ```
 
 ## `redate`
-
-rewrite all commits that has `2021` to year to `1987`
+rewrite all commits that has `2021` to year to `1984`
 
 ```bash
-restory redate 2021 1987
+restory redate 2021 1984
 ```
-
-> [!NOTE]  
-> this will also automagically update the day and month
 
 rewrites a specific commit's day
 
@@ -112,11 +108,11 @@ restory redate "$(echo `date`)" -n 5
 ```
 
 ## `reauthor`
-
+rewrite all commit author names to `The Devil`
 > [!CAUTION]
 > IMPERSONATION IS STRICTLY PROHIBITED!  
 > ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
-> rewrite all commit author names to `The Devil`
+
 
 ```bash
 restory reauthor 'The Devil'
@@ -129,11 +125,10 @@ restory reauthor 'Jebediah Kerman' -n 5
 ```
 
 ## `remail`
-
+rewrite all commit author and committer email to `thedevil@666.com`
 > [!CAUTION]
 > IMPERSONATION IS STRICTLY PROHIBITED!  
 > ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!  
-> rewrite all commit author and committer email to `thedevil@666.com`
 
 ```bash
 restory remail 'thedevil@666.com'
