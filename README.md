@@ -1,4 +1,4 @@
-<img src="./shellfies/logo.png" />
+<img src="./shellfies/logo.svg" />
 
 # restory 3.0
 
