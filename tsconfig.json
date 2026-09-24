@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "commonjs",
-    "lib": ["ES2022", "dom"],
+    "module": "nodenext",
+    "lib": ["ES2023"],
     "outDir": "./dist",
-    "rootDir": ".",
-    "strict": false,
+    "rootDir": "./src",
+    "strict": true,
     "esModuleInterop": true,
-    "moduleResolution": "node",
-    "noImplicitAny": true,
+    "moduleResolution": "nodenext",
     "declaration": true,
-    "types": ["@types/node"]
+    "skipLibCheck": true,
+    "types": ["node"]
   },
-  "exclude": ["shellfies", "dist", "node_modules", "index.test.ts"]
+  "include": ["src"]
 }
