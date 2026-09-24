@@ -104,10 +104,6 @@ restory ls -n 5
 restory ls -r c884ca6 0b4be21
 ```
 
-<img src="./shellfies/ls.png" />
-
-[![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
-
 ## `grep`
 
 every commit that mentions `moon` anywhere: sha, message, names, emails or dates.

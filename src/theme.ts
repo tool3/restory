@@ -30,7 +30,7 @@ const LOGO = [
 
 const logo = (space = ' '): string =>
   gradient('#f7681f', '#eb0f84', '#a603d5', '#03aad2')
-    .diagonal(LOGO.replace(/ /g, space))
+    (LOGO.replace(/ /g, space))
     .split('\n')
     .map((line) => `${space.repeat(2)}${line}`)
     .join('\n');
