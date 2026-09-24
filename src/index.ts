@@ -24,7 +24,7 @@ const grep = async ({ select, cwd, ...query }: GrepOptions): Promise<GrepResult>
 
 export { list, grep, ListOptions, GrepOptions, GrepResult };
 export { rewrite, RewriteOptions, RewriteResult, RemovedOrigin } from './rewrite';
-export { undo, listBackups, Backup, Restored, UndoOptions } from './backup';
+export { undo, listBackups, clearBackups, Backup, BackupsOptions, Restored, UndoOptions } from './backup';
 export { Commit, Identity } from './commit';
 export { Edit, SetEdit, ReplaceEdit, ShiftEdit } from './edit';
 export { FIELDS, SEARCH_FIELDS, Field, SearchField } from './fields';

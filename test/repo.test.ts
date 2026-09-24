@@ -4,7 +4,7 @@ import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { describe, it } from 'node:test';
-import { grep, list, listBackups, rewrite, undo } from '../src/index';
+import { clearBackups, grep, list, listBackups, rewrite, undo } from '../src/index';
 
 const git = (cwd: string, ...args: string[]): string => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
 
@@ -119,6 +119,50 @@ describe('rewriting a repository', () => {
       assert.equal(git(repo, 'rev-parse', 'HEAD'), head);
       assert.equal(git(repo, 'remote'), 'origin');
       assert.deepEqual(await listBackups({ cwd: repo }), []);
+    }),
+  );
+
+  it(
+    'keeps only the newest backups',
+    withRepo(async (repo) => {
+      const names = ['a', 'b', 'c', 'd'];
+      const results = await names.reduce<Promise<readonly Awaited<ReturnType<typeof rewrite>>[]>>(
+        async (previous, name) => [
+          ...(await previous),
+          await rewrite({ cwd: repo, edits: [{ field: 'name', set: name }], keepOrigin: true, keepBackups: 2 }),
+        ],
+        Promise.resolve([]),
+      );
+      assert.deepEqual(
+        results.map(({ prunedBackups }) => prunedBackups.length),
+        [0, 0, 1, 1],
+      );
+      const backups = await listBackups({ cwd: repo });
+      assert.deepEqual(
+        backups.map(({ id }) => id),
+        results
+          .slice(2)
+          .map(({ backup }) => backup?.id)
+          .toReversed(),
+      );
+      assert.equal((await clearBackups({ cwd: repo })).length, 2);
+      assert.deepEqual(await listBackups({ cwd: repo }), []);
+    }),
+  );
+
+  it(
+    'undo restores the exact refs and branch from before the rewrite',
+    withRepo(async (repo) => {
+      const head = git(repo, 'rev-parse', 'HEAD');
+      await rewrite({ cwd: repo, edits: [{ field: 'name', set: 'Jeb' }], keepOrigin: true });
+      git(repo, 'checkout', '-q', '-b', 'after-rewrite');
+      git(repo, 'tag', 'v-after');
+      await undo({ cwd: repo });
+      assert.equal(git(repo, 'symbolic-ref', '--short', 'HEAD'), 'main');
+      assert.equal(git(repo, 'rev-parse', 'HEAD'), head);
+      assert.equal(git(repo, 'branch', '--format=%(refname:short)'), 'main');
+      assert.equal(git(repo, 'tag'), '');
+      assert.equal(git(repo, 'rev-parse', 'origin/main'), head);
     }),
   );
 

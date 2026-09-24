@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 275.6 248.4" width="275.6" height="248.4">
+  
+  
+  
+  
+<defs><filter id="vctrfx-12uxn3-filter-0" color-interpolation-filters="sRGB" x="-35%" y="-35%" width="170%" height="170%"><feComponentTransfer in="SourceGraphic" result="vctrfx-12uxn3-bloom-bright-0"><feFuncR type="linear" slope="2.2222" intercept="-1.2222"/><feFuncG type="linear" slope="2.2222" intercept="-1.2222"/><feFuncB type="linear" slope="2.2222" intercept="-1.2222"/></feComponentTransfer><feGaussianBlur in="vctrfx-12uxn3-bloom-bright-0" stdDeviation="8" result="vctrfx-12uxn3-bloom-spread-0"/><feComponentTransfer in="vctrfx-12uxn3-bloom-spread-0" result="vctrfx-12uxn3-bloom-boost-0"><feFuncR type="linear" slope="2"/><feFuncG type="linear" slope="2"/><feFuncB type="linear" slope="2"/></feComponentTransfer><feBlend in="SourceGraphic" in2="vctrfx-12uxn3-bloom-boost-0" mode="screen" result="vctrfx-out-0"/></filter><clipPath id="vctrfx-12uxn3-clip" clipPathUnits="userSpaceOnUse"><rect x="0" y="0" width="275.6" height="248.4" rx="10" ry="10"/></clipPath></defs><g filter="url(#vctrfx-12uxn3-filter-0)" clip-path="url(#vctrfx-12uxn3-clip)"><rect x="0" y="0" width="275.6" height="248.4" fill="#000000" rx="10" ry="10"/><g class="title-bar">
+    <circle cx="16" cy="20" r="6" fill="#ff5f56"/>
+    <circle cx="36" cy="20" r="6" fill="#ffbd2e"/>
+    <circle cx="56" cy="20" r="6" fill="#27c93f"/>
+  </g><g class="glyphs">
+    <rect x="125.2" y="74.6" width="8.4" height="1" fill="#8435f1" shape-rendering="crispEdges"/>
+    <rect x="24.4" y="94.2" width="8.4" height="1" fill="#f5359f" shape-rendering="crispEdges"/>
+    <rect x="32.8" y="94.2" width="8.4" height="1" fill="#eb3aa6" shape-rendering="crispEdges"/>
+    <rect x="41.2" y="94.2" width="8.4" height="1" fill="#e23eae" shape-rendering="crispEdges"/>
+    <rect x="58" y="94.2" width="8.4" height="1" fill="#ce43bc" shape-rendering="crispEdges"/>
+    <rect x="66.4" y="94.2" width="8.4" height="1" fill="#c544c3" shape-rendering="crispEdges"/>
+    <rect x="74.8" y="94.2" width="8.4" height="1" fill="#bb44ca" shape-rendering="crispEdges"/>
+    <rect x="91.6" y="94.2" width="8.4" height="1" fill="#a843d7" shape-rendering="crispEdges"/>
+    <rect x="100" y="94.2" width="8.4" height="1" fill="#9f41de" shape-rendering="crispEdges"/>
+    <rect x="108.4" y="94.2" width="8.4" height="1" fill="#963ee4" shape-rendering="crispEdges"/>
+    <rect x="142" y="94.2" width="8.4" height="1" fill="#7a45f7" shape-rendering="crispEdges"/>
+    <rect x="158.8" y="94.2" width="8.4" height="1" fill="#7765f6" shape-rendering="crispEdges"/>
+    <rect x="167.2" y="94.2" width="8.4" height="1" fill="#7572f5" shape-rendering="crispEdges"/>
+    <rect x="175.6" y="94.2" width="8.4" height="1" fill="#737ff4" shape-rendering="crispEdges"/>
+    <rect x="192.4" y="94.2" width="8.4" height="1" fill="#6c97f3" shape-rendering="crispEdges"/>
+    <rect x="200.8" y="94.2" width="8.4" height="1" fill="#68a2f1" shape-rendering="crispEdges"/>
+    <rect x="209.2" y="94.2" width="8.4" height="1" fill="#62adf0" shape-rendering="crispEdges"/>
+    <rect x="226" y="94.2" width="8.4" height="1" fill="#55c2ed" shape-rendering="crispEdges"/>
+    <rect x="242.8" y="94.2" width="8.4" height="1" fill="#3fd8e8" shape-rendering="crispEdges"/>
+    <rect x="41.2" y="113.8" width="8.4" height="1" fill="#e23eae" shape-rendering="crispEdges"/>
+    <rect x="74.8" y="113.8" width="8.4" height="1" fill="#bb44ca" shape-rendering="crispEdges"/>
+    <rect x="91.6" y="113.8" width="8.4" height="1" fill="#a843d7" shape-rendering="crispEdges"/>
+    <rect x="142" y="113.8" width="8.4" height="1" fill="#7a45f7" shape-rendering="crispEdges"/>
+    <rect x="209.2" y="113.8" width="8.4" height="1" fill="#62adf0" shape-rendering="crispEdges"/>
+    <rect x="24.4" y="133.4" width="8.4" height="1" fill="#f5359f" shape-rendering="crispEdges"/>
+    <rect x="58" y="133.4" width="8.4" height="1" fill="#ce43bc" shape-rendering="crispEdges"/>
+    <rect x="66.4" y="133.4" width="8.4" height="1" fill="#c544c3" shape-rendering="crispEdges"/>
+    <rect x="74.8" y="133.4" width="8.4" height="1" fill="#bb44ca" shape-rendering="crispEdges"/>
+    <rect x="91.6" y="133.4" width="8.4" height="1" fill="#a843d7" shape-rendering="crispEdges"/>
+    <rect x="100" y="133.4" width="8.4" height="1" fill="#9f41de" shape-rendering="crispEdges"/>
+    <rect x="108.4" y="133.4" width="8.4" height="1" fill="#963ee4" shape-rendering="crispEdges"/>
+    <rect x="125.2" y="133.4" width="8.4" height="1" fill="#8435f1" shape-rendering="crispEdges"/>
+    <rect x="158.8" y="133.4" width="8.4" height="1" fill="#7765f6" shape-rendering="crispEdges"/>
+    <rect x="167.2" y="133.4" width="8.4" height="1" fill="#7572f5" shape-rendering="crispEdges"/>
+    <rect x="175.6" y="133.4" width="8.4" height="1" fill="#737ff4" shape-rendering="crispEdges"/>
+    <rect x="192.4" y="133.4" width="8.4" height="1" fill="#6c97f3" shape-rendering="crispEdges"/>
+    <rect x="226" y="133.4" width="8.4" height="1" fill="#55c2ed" shape-rendering="crispEdges"/>
+    <rect x="226" y="153" width="8.4" height="1" fill="#55c2ed" shape-rendering="crispEdges"/>
+    <rect x="234.4" y="153" width="8.4" height="1" fill="#4bcdeb" shape-rendering="crispEdges"/>
+    <rect x="242.8" y="153" width="8.4" height="1" fill="#3fd8e8" shape-rendering="crispEdges"/>
+  </g><g class="text">
+    <text y="70" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="41.2" fill="#e23eae"> </tspan><tspan x="49.6" fill="#d841b5"> </tspan><tspan x="58" fill="#ce43bc"> </tspan><tspan x="66.4" fill="#c544c3"> </tspan><tspan x="74.8" fill="#bb44ca"> </tspan><tspan x="83.2" fill="#b244d0"> </tspan><tspan x="91.6" fill="#a843d7"> </tspan><tspan x="100" fill="#9f41de"> </tspan><tspan x="108.4" fill="#963ee4"> </tspan><tspan x="116.8" fill="#8d3aea"> </tspan></text>
+    <text y="89.6" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="49.6" fill="#d841b5"> </tspan><tspan x="83.2" fill="#b244d0"> </tspan><tspan x="116.8" fill="#8d3aea">|</tspan><tspan x="125.2" fill="#8435f1"> </tspan><tspan x="133.6" fill="#7b2ff7">|</tspan><tspan x="150.4" fill="#7956f6"> </tspan><tspan x="184" fill="#708bf4"> </tspan><tspan x="217.6" fill="#5cb8ee"> </tspan><tspan x="234.4" fill="#4bcdeb"> </tspan></text>
+    <text y="109.2" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97">|</tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="49.6" fill="#d841b5">|</tspan><tspan x="58" fill="#ce43bc"> </tspan><tspan x="66.4" fill="#c544c3">-</tspan><tspan x="83.2" fill="#b244d0">|</tspan><tspan x="100" fill="#9f41de"> </tspan><tspan x="108.4" fill="#963ee4">-</tspan><tspan x="116.8" fill="#8d3aea">|</tspan><tspan x="125.2" fill="#8435f1"> </tspan><tspan x="133.6" fill="#7b2ff7"> </tspan><tspan x="150.4" fill="#7956f6">|</tspan><tspan x="158.8" fill="#7765f6"> </tspan><tspan x="167.2" fill="#7572f5">.</tspan><tspan x="175.6" fill="#737ff4"> </tspan><tspan x="184" fill="#708bf4">|</tspan><tspan x="192.4" fill="#6c97f3"> </tspan><tspan x="200.8" fill="#68a2f1"> </tspan><tspan x="217.6" fill="#5cb8ee">|</tspan><tspan x="226" fill="#55c2ed"> </tspan><tspan x="234.4" fill="#4bcdeb">|</tspan><tspan x="242.8" fill="#3fd8e8"> </tspan><tspan x="251.2" fill="#2de2e6">|</tspan></text>
+    <text y="128.8" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97">|</tspan><tspan x="32.8" fill="#eb3aa6">|</tspan><tspan x="41.2" fill="#e23eae"> </tspan><tspan x="49.6" fill="#d841b5">|</tspan><tspan x="83.2" fill="#b244d0">|</tspan><tspan x="116.8" fill="#8d3aea">|</tspan><tspan x="133.6" fill="#7b2ff7">|</tspan><tspan x="142" fill="#7a45f7"> </tspan><tspan x="150.4" fill="#7956f6">|</tspan><tspan x="184" fill="#708bf4">|</tspan><tspan x="200.8" fill="#68a2f1">|</tspan><tspan x="209.2" fill="#62adf0"> </tspan><tspan x="217.6" fill="#5cb8ee">|</tspan><tspan x="234.4" fill="#4bcdeb"> </tspan><tspan x="242.8" fill="#3fd8e8"> </tspan><tspan x="251.2" fill="#2de2e6">|</tspan></text>
+    <text y="148.4" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="41.2" fill="#e23eae"> </tspan><tspan x="49.6" fill="#d841b5"> </tspan><tspan x="58" fill="#ce43bc"> </tspan><tspan x="66.4" fill="#c544c3"> </tspan><tspan x="74.8" fill="#bb44ca"> </tspan><tspan x="83.2" fill="#b244d0"> </tspan><tspan x="91.6" fill="#a843d7"> </tspan><tspan x="100" fill="#9f41de"> </tspan><tspan x="108.4" fill="#963ee4"> </tspan><tspan x="116.8" fill="#8d3aea"> </tspan><tspan x="125.2" fill="#8435f1"> </tspan><tspan x="133.6" fill="#7b2ff7"> </tspan><tspan x="142" fill="#7a45f7"> </tspan><tspan x="150.4" fill="#7956f6"> </tspan><tspan x="158.8" fill="#7765f6"> </tspan><tspan x="167.2" fill="#7572f5"> </tspan><tspan x="175.6" fill="#737ff4"> </tspan><tspan x="184" fill="#708bf4"> </tspan><tspan x="192.4" fill="#6c97f3"> </tspan><tspan x="200.8" fill="#68a2f1"> </tspan><tspan x="209.2" fill="#62adf0"> </tspan><tspan x="217.6" fill="#5cb8ee">|</tspan><tspan x="251.2" fill="#2de2e6">|</tspan></text>
+    <text y="168" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="41.2" fill="#e23eae"> </tspan><tspan x="49.6" fill="#d841b5">r</tspan><tspan x="58" fill="#ce43bc">e</tspan><tspan x="66.4" fill="#c544c3" text-decoration="line-through">w</tspan><tspan x="74.8" fill="#bb44ca" text-decoration="line-through">r</tspan><tspan x="83.2" fill="#b244d0" text-decoration="line-through">i</tspan><tspan x="91.6" fill="#a843d7" text-decoration="line-through">t</tspan><tspan x="100" fill="#9f41de" text-decoration="line-through">e</tspan><tspan x="108.4" fill="#963ee4" text-decoration="line-through"> </tspan><tspan x="116.8" fill="#8d3aea" text-decoration="line-through">g</tspan><tspan x="125.2" fill="#8435f1" text-decoration="line-through">i</tspan><tspan x="133.6" fill="#7b2ff7" text-decoration="line-through">t</tspan><tspan x="142" fill="#7a45f7" text-decoration="line-through"> </tspan><tspan x="150.4" fill="#7956f6" text-decoration="line-through">h</tspan><tspan x="158.8" fill="#7765f6" text-decoration="line-through">i</tspan><tspan x="167.2" fill="#7572f5">s</tspan><tspan x="175.6" fill="#737ff4">t</tspan><tspan x="184" fill="#708bf4">o</tspan><tspan x="192.4" fill="#6c97f3">r</tspan><tspan x="200.8" fill="#68a2f1">y</tspan><tspan x="209.2" fill="#62adf0"> </tspan><tspan x="217.6" fill="#5cb8ee"> </tspan><tspan x="226" fill="#55c2ed"> </tspan><tspan x="234.4" fill="#4bcdeb"> </tspan><tspan x="242.8" fill="#3fd8e8"> </tspan><tspan x="251.2" fill="#2de2e6"> </tspan></text>
+    <text y="207.2" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="41.2" fill="#e23eae"> </tspan></text>
+    <text y="226.8" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#ff2e97"> </tspan><tspan x="24.4" fill="#f5359f"> </tspan><tspan x="32.8" fill="#eb3aa6"> </tspan><tspan x="41.2" fill="#e23eae"> </tspan></text>
+  </g></g></svg>

@@ -2,7 +2,7 @@
 
 # restory 3.0
 
-<img width="500" src="./shellfies/logo.svg" />
+<img width="500" src="./shellfies/logo-striked.svg" />
 
 </div>
 
@@ -41,7 +41,7 @@ things to know:
 - the working tree must be clean before a rewrite.
 - **`origin` is removed after a rewrite by default**, since the new history no longer matches it. restory prints the url and the commands to reconnect and force push. pass `--keep-origin` (`-k`) to keep it.
 - without a selection flag (`-s`, `-n`, `-r`, `-g`), a command applies to **every** commit reachable from `HEAD`.
-- a backup bundle is written to `.git/restory/backups` before every rewrite. pass `--no-backup` to skip it.
+- a backup bundle of the whole repo is written to `.git/restory/backups` before every rewrite. only the newest 5 are kept (`--keep-backups <n>`, `0` keeps all). pass `--no-backup` to skip it.
 
 # commands
 
@@ -91,6 +91,7 @@ a new date can be any format javascript parses (`2024-01-01`, `2024-01-01 10:00`
 | `--dry-run`     | `-d`  | show what would change, rewrite nothing  | `false` |
 | `--keep-origin` | `-k`  | keep the `origin` remote after rewriting | `false` |
 | `--backup`      |       | save a backup for `restory undo`         | `true`  |
+| `--keep-backups` |      | how many backups to keep, `0` keeps all  | `5`     |
 | `--quiet`       | `-q`  | only print the summary                   | `false` |
 
 ## output
@@ -192,7 +193,13 @@ restory replace message Moon Mun
 restory undo
 ```
 
-`restory undo --list` shows the saved backups, `restory undo <id>` restores a specific one.
+`undo` puts the repo back exactly as it was before that rewrite: branches, tags and remote-tracking refs are restored, refs created since are removed, the branch you were on is checked out again, and `origin` is re-added if it was removed. the restored backup is then deleted, so running `undo` again steps back one more rewrite.
+
+```bash
+restory undo --list   # show saved backups, newest first
+restory undo <id>     # restore a specific backup
+restory undo --clear  # delete every backup
+```
 
 # programmatic api
 

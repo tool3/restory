@@ -3,7 +3,7 @@
 |  _| -_|_ -|  _| . |  _| | |
 |_| |___|___|_| |___|_| |_  |
                         |___|
-    rewrite git history      
+    re[9mwrite git hi[0mstory      
 
     
     

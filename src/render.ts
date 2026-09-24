@@ -147,9 +147,13 @@ const renderSummary = ({ changes, dryRun, duration }: RewriteResult): string =>
           `in ${(duration / 1000).toFixed(2)}s`,
         )}`;
 
-const renderBackupNote = (backup?: Backup): readonly string[] =>
+const renderBackupNote = (backup: Backup | undefined, pruned: readonly Backup[]): readonly string[] =>
   backup
-    ? [`${INDENT}${theme.muted('backup saved · run')} ${theme.strong('restory undo')} ${theme.muted('to restore it')}`]
+    ? [
+        `${INDENT}${theme.muted('backup saved · run')} ${theme.strong('restory undo')} ${theme.muted('to restore it')}${
+          pruned.length > 0 ? theme.muted(` · removed ${plural(pruned.length, 'older backup')}`) : ''
+        }`,
+      ]
     : [];
 
 const renderOriginWarning = (removed?: RemovedOrigin): readonly string[] =>
@@ -173,7 +177,7 @@ const renderRewrite = (
     ...(quiet ? [] : result.changes.flatMap(renderCommitChange(result.rewritten, result.dryRun, width))),
     ...(quiet || result.changes.length === 0 ? [] : ['']),
     renderSummary(result),
-    ...renderBackupNote(result.backup),
+    ...renderBackupNote(result.backup, result.prunedBackups),
     ...renderOriginWarning(result.removedOrigin),
   ].join('\n');
 
@@ -199,6 +203,11 @@ const renderUndo = ({ backup, restoredOrigin }: Restored): string =>
       : []),
   ].join('\n');
 
+const renderCleared = (removed: readonly Backup[]): string =>
+  removed.length === 0
+    ? `${INDENT}${theme.muted('no backups to remove')}`
+    : `${INDENT}${theme.success('✔ removed')} ${theme.strong(plural(removed.length, 'backup'))}`;
+
 const renderError = (message: string): string => `${INDENT}${theme.error('✖')} ${theme.error(message)}`;
 
-export { renderList, renderGrep, renderRewrite, renderBackups, renderUndo, renderError };
+export { renderList, renderGrep, renderRewrite, renderBackups, renderUndo, renderCleared, renderError };

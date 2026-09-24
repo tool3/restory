@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 import yargs, { Argv } from 'yargs';
 import { hideBin } from 'yargs/helpers';
-import { listBackups, undo } from './backup';
+import { DEFAULT_KEEP, clearBackups, listBackups, undo } from './backup';
 import { Edit } from './edit';
 import { fail } from './fail';
 import { grep, list } from './index';
 import { toRegExp } from './pattern';
-import { renderBackups, renderError, renderGrep, renderList, renderRewrite, renderUndo } from './render';
+import { renderBackups, renderCleared, renderError, renderGrep, renderList, renderRewrite, renderUndo } from './render';
 import { rewrite } from './rewrite';
 import { Selection } from './select';
 import { spin } from './spinner';
@@ -31,6 +31,7 @@ interface RewriteArgs extends SelectionArgs, OutputArgs {
   readonly dryRun: boolean;
   readonly keepOrigin: boolean;
   readonly backup: boolean;
+  readonly keepBackups: number;
   readonly quiet: boolean;
 }
 
@@ -113,8 +114,13 @@ const withRewrite = <T>(y: Argv<T>) =>
       description: 'keep the origin remote after rewriting',
     })
     .option('backup', { type: 'boolean', default: true, description: 'save a backup for `restory undo`' })
+    .option('keep-backups', {
+      type: 'number',
+      default: DEFAULT_KEEP,
+      description: 'how many backups to keep, oldest are removed (0: keep all)',
+    })
     .option('quiet', { alias: 'q', type: 'boolean', default: false, description: 'only print the summary' })
-    .group(['dry-run', 'keep-origin', 'backup', 'quiet'], theme.strong('rewrite'));
+    .group(['dry-run', 'keep-origin', 'backup', 'keep-backups', 'quiet'], theme.strong('rewrite'));
 
 const runRewrite = async (argv: RewriteArgs, edits: readonly Edit[]): Promise<void> => {
   const stop = argv.json || argv.dryRun ? () => undefined : spin(theme.muted('rewriting history'));
@@ -124,6 +130,7 @@ const runRewrite = async (argv: RewriteArgs, edits: readonly Edit[]): Promise<vo
     ...patternOptions(argv),
     keepOrigin: argv.keepOrigin,
     backup: argv.backup,
+    keepBackups: argv.keepBackups,
     dryRun: argv.dryRun,
   }).finally(stop);
   return argv.json ? printJson(result) : print(renderRewrite(result, { quiet: argv.quiet, width: width() }));
@@ -245,8 +252,11 @@ const cli = yargs(hideBin(process.argv))
     (y) =>
       y
         .positional('id', { type: 'string', description: 'backup to restore (default: the latest)' })
-        .option('list', { type: 'boolean', default: false, description: 'list saved backups' }),
+        .option('list', { type: 'boolean', description: 'list saved backups' })
+        .option('clear', { type: 'boolean', description: 'delete every saved backup' })
+        .conflicts('list', 'clear'),
     async (argv) => {
+      if (argv.clear) return argv.json ? printJson(await clearBackups()) : print(renderCleared(await clearBackups()));
       if (argv.list) return argv.json ? printJson(await listBackups()) : print(renderBackups(await listBackups()));
       const restored = await undo({ id: argv.id });
       return argv.json ? printJson(restored) : print(renderUndo(restored));
