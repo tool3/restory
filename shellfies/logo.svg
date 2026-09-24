@@ -1,13 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 275.6 248.4" width="275.6" height="248.4">
-  
-  
-  
-  
-<defs><filter id="vctrfx-a9tjuu-filter-0" color-interpolation-filters="sRGB" x="-35%" y="-35%" width="170%" height="170%"><feComponentTransfer in="SourceGraphic" result="vctrfx-a9tjuu-bloom-bright-0"><feFuncR type="linear" slope="2.2222" intercept="-1.2222"/><feFuncG type="linear" slope="2.2222" intercept="-1.2222"/><feFuncB type="linear" slope="2.2222" intercept="-1.2222"/></feComponentTransfer><feGaussianBlur in="vctrfx-a9tjuu-bloom-bright-0" stdDeviation="8" result="vctrfx-a9tjuu-bloom-spread-0"/><feComponentTransfer in="vctrfx-a9tjuu-bloom-spread-0" result="vctrfx-a9tjuu-bloom-boost-0"><feFuncR type="linear" slope="1.1"/><feFuncG type="linear" slope="1.1"/><feFuncB type="linear" slope="1.1"/></feComponentTransfer><feBlend in="SourceGraphic" in2="vctrfx-a9tjuu-bloom-boost-0" mode="screen" result="vctrfx-out-0"/></filter><clipPath id="vctrfx-a9tjuu-clip" clipPathUnits="userSpaceOnUse"><rect x="0" y="0" width="275.6" height="248.4" rx="10" ry="10"/></clipPath></defs><g filter="url(#vctrfx-a9tjuu-filter-0)" clip-path="url(#vctrfx-a9tjuu-clip)"><rect x="0" y="0" width="275.6" height="248.4" fill="#1e1e1e" rx="10" ry="10"/><g class="title-bar">
+  <rect x="0" y="0" width="275.6" height="248.4" fill="#000000" rx="10" ry="10"/>
+  <g class="title-bar">
     <circle cx="16" cy="20" r="6" fill="#ff5f56"/>
     <circle cx="36" cy="20" r="6" fill="#ffbd2e"/>
     <circle cx="56" cy="20" r="6" fill="#27c93f"/>
-  </g><g class="glyphs">
+  </g>
+  <g class="glyphs">
     <rect x="125.2" y="74.6" width="8.4" height="1" fill="#cf21a6" shape-rendering="crispEdges"/>
     <rect x="24.4" y="94.2" width="8.4" height="1" fill="#f66235" shape-rendering="crispEdges"/>
     <rect x="32.8" y="94.2" width="8.4" height="1" fill="#f45c44" shape-rendering="crispEdges"/>
@@ -48,7 +46,8 @@
     <rect x="226" y="153" width="8.4" height="1" fill="#6e88d4" shape-rendering="crispEdges"/>
     <rect x="234.4" y="153" width="8.4" height="1" fill="#5c94d3" shape-rendering="crispEdges"/>
     <rect x="242.8" y="153" width="8.4" height="1" fill="#439fd3" shape-rendering="crispEdges"/>
-  </g><g class="text">
+  </g>
+  <g class="text">
     <text y="70" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f"> </tspan><tspan x="24.4" fill="#f66235"> </tspan><tspan x="32.8" fill="#f45c44"> </tspan><tspan x="41.2" fill="#f35650"> </tspan><tspan x="49.6" fill="#f24f5a"> </tspan><tspan x="58" fill="#f14863"> </tspan><tspan x="66.4" fill="#ef3f6c"> </tspan><tspan x="74.8" fill="#ee3573"> </tspan><tspan x="83.2" fill="#ed297b"> </tspan><tspan x="91.6" fill="#eb1882"> </tspan><tspan x="100" fill="#e6168a"> </tspan><tspan x="108.4" fill="#de1c94"> </tspan><tspan x="116.8" fill="#d61f9d"> </tspan></text>
     <text y="89.6" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f"> </tspan><tspan x="49.6" fill="#f24f5a"> </tspan><tspan x="83.2" fill="#ed297b"> </tspan><tspan x="116.8" fill="#d61f9d">|</tspan><tspan x="125.2" fill="#cf21a6"> </tspan><tspan x="133.6" fill="#c721ae">|</tspan><tspan x="150.4" fill="#b91dbf"> </tspan><tspan x="184" fill="#9e3bd5"> </tspan><tspan x="217.6" fill="#7c7bd4"> </tspan><tspan x="234.4" fill="#5c94d3"> </tspan></text>
     <text y="109.2" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f">|</tspan><tspan x="24.4" fill="#f66235"> </tspan><tspan x="32.8" fill="#f45c44"> </tspan><tspan x="49.6" fill="#f24f5a">|</tspan><tspan x="58" fill="#f14863"> </tspan><tspan x="66.4" fill="#ef3f6c">-</tspan><tspan x="83.2" fill="#ed297b">|</tspan><tspan x="100" fill="#e6168a"> </tspan><tspan x="108.4" fill="#de1c94">-</tspan><tspan x="116.8" fill="#d61f9d">|</tspan><tspan x="125.2" fill="#cf21a6"> </tspan><tspan x="133.6" fill="#c721ae"> </tspan><tspan x="150.4" fill="#b91dbf">|</tspan><tspan x="158.8" fill="#b117c7"> </tspan><tspan x="167.2" fill="#ab0ed0">.</tspan><tspan x="175.6" fill="#a41bd5"> </tspan><tspan x="184" fill="#9e3bd5">|</tspan><tspan x="192.4" fill="#984fd5"> </tspan><tspan x="200.8" fill="#9060d5"> </tspan><tspan x="217.6" fill="#7c7bd4">|</tspan><tspan x="226" fill="#6e88d4"> </tspan><tspan x="234.4" fill="#5c94d3">|</tspan><tspan x="242.8" fill="#439fd3"> </tspan><tspan x="251.2" fill="#03aad2">|</tspan></text>
@@ -57,4 +56,5 @@
     <text y="168" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f"> </tspan><tspan x="24.4" fill="#f66235"> </tspan><tspan x="32.8" fill="#f45c44"> </tspan><tspan x="41.2" fill="#f35650"> </tspan><tspan x="49.6" fill="#f24f5a">r</tspan><tspan x="58" fill="#f14863">e</tspan><tspan x="66.4" fill="#ef3f6c">w</tspan><tspan x="74.8" fill="#ee3573">r</tspan><tspan x="83.2" fill="#ed297b">i</tspan><tspan x="91.6" fill="#eb1882">t</tspan><tspan x="100" fill="#e6168a">e</tspan><tspan x="108.4" fill="#de1c94"> </tspan><tspan x="116.8" fill="#d61f9d">g</tspan><tspan x="125.2" fill="#cf21a6">i</tspan><tspan x="133.6" fill="#c721ae">t</tspan><tspan x="142" fill="#c020b7"> </tspan><tspan x="150.4" fill="#b91dbf">h</tspan><tspan x="158.8" fill="#b117c7">i</tspan><tspan x="167.2" fill="#ab0ed0">s</tspan><tspan x="175.6" fill="#a41bd5">t</tspan><tspan x="184" fill="#9e3bd5">o</tspan><tspan x="192.4" fill="#984fd5">r</tspan><tspan x="200.8" fill="#9060d5">y</tspan><tspan x="209.2" fill="#876ed5"> </tspan><tspan x="217.6" fill="#7c7bd4"> </tspan><tspan x="226" fill="#6e88d4"> </tspan><tspan x="234.4" fill="#5c94d3"> </tspan><tspan x="242.8" fill="#439fd3"> </tspan><tspan x="251.2" fill="#03aad2"> </tspan></text>
     <text y="207.2" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f"> </tspan><tspan x="24.4" fill="#f66235"> </tspan><tspan x="32.8" fill="#f45c44"> </tspan><tspan x="41.2" fill="#f35650"> </tspan></text>
     <text y="226.8" font-family="'SF Mono', 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'Courier New', monospace" font-size="14" xml:space="preserve"><tspan x="16" fill="#f7681f"> </tspan><tspan x="24.4" fill="#f66235"> </tspan><tspan x="32.8" fill="#f45c44"> </tspan><tspan x="41.2" fill="#f35650"> </tspan></text>
-  </g></g></svg>
+  </g>
+</svg>
