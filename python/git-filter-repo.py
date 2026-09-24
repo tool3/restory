@@ -1991,8 +1991,8 @@ EXAMPLES
                "performed and commands being run.  When used together "
                "with --dry-run, also show extra information about what "
                "would be run."))
-    misc.add_argument('--safe', action='store_false',
-        help=_("Remove origin when done"))
+    misc.add_argument('--keep-origin', action='store_true',
+        help=_("Do not remove the 'origin' remote when done"))
     # WARNING: --state-branch has some problems:
     #   * It does not work well with manually inserted objects (user creating
     #     Blob() or Commit() or Tag() objects and calling
@@ -3684,7 +3684,7 @@ class RepoFilter(object):
       raise SystemExit(_("git update-ref failed; see above")) # pragma: no cover
 
     # Now remove
-    if self._args.safe:
+    if not self._args.keep_origin:
       print("[DEBUG] Removing 'origin' remote (rewritten history will no ")
       print("        longer be related; consider re-pushing it elsewhere.")
       subproc.call('git remote rm origin'.split(), cwd=target_working_dir)

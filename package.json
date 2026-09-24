@@ -3,31 +3,43 @@
   "version": "2.0.0",
   "description": "rewrite git history",
   "main": "dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
-    "./dist"
+    "dist",
+    "python"
   ],
   "bin": {
-    "restory": "dist/index.js"
+    "restory": "dist/cli.js"
   },
   "scripts": {
-    "build": "tsc && cp -r utils/git-filter-repo dist/utils"
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test test/*.test.ts",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "cli",
     "git",
-    "commits"
+    "commits",
+    "history",
+    "rewrite",
+    "filter-repo",
+    "grep"
   ],
   "author": "Tal Hayut",
   "license": "MIT",
   "dependencies": {
-    "cli-table3": "^0.6.0",
-    "ora": "^5.3.0",
-    "yargs": "^16.2.0"
+    "cli-table3": "^0.6.5",
+    "grfti": "^0.6.0",
+    "yargs": "^17.7.3"
   },
   "devDependencies": {
-    "@types/node": "^22.13.10",
+    "@types/node": "^22.20.4",
     "@types/yargs": "^17.0.33",
+    "tsx": "^4.23.15",
     "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

@@ -1,16 +1,19 @@
 <img src="./shellfies/logo.png" />
 
-# restory 2.0
+# restory 3.0
 
-✅ Rewritten in TypeScript.  
-✅ Added quiet mode.  
-✅ super fast (uses git-filter-repo instead of git filter branch).  
-✅ simple and intuitive api.  
-✅ standalone - no 3rd party requirements (git-filter-repo included).
+✅ one pass: every rewrite is a single `git-filter-repo` run, however many commits it touches.  
+✅ `set`, `replace` and `shift` replace the old `remsg`, `reauthor`, `remail` and `redate` commands.  
+✅ `grep` searches every field of every commit.  
+✅ `--dry-run` shows the change before anything is rewritten.  
+✅ `restory undo` restores the backup taken before each rewrite.  
+✅ you choose whether `origin` stays or goes.  
+✅ `--json` output and a typed programmatic API.  
+✅ standalone: [`git-filter-repo`](https://github.com/newren/git-filter-repo) is bundled, so you only need `git` and `python3`.
 
 > [!CAUTION]
 > THIS WILL REWRITE YOUR GIT HISTORY!  
-> THIS OPERATION CANNOT BE REVERTED!  
+> EVERY REWRITTEN COMMIT (AND EVERY COMMIT AFTER IT) GETS A NEW SHA!  
 > USE AT YOUR OWN RISK!
 
 # install
@@ -22,153 +25,209 @@ npm install -g @tool3/restory
 or
 
 ```bash
-npx @tool3/restory <cmd> [args] [options]
+npx @tool3/restory <command> [args] [options]
 ```
 
 things to know:
 
-- `restory` uses it's own dist of [`git-filter-repo`](https://github.com/newren/git-filter-repo)  
-  and therefore doesn't rely on you having it.
-- by default it does **NOT** remove `origin` when done rewriting. (unless run with `--safe`).
-- every `restory` command recreates the commit|s shas.
-- you need to have a clean working directory.
-- you will have to force push if using the same `origin`.
-- when run without commit filter flag (`-s` || `-n` || `-r` - see [options](#options)) - the command will rewrite **ALL** commits with given input.
-
-# api
-
-every command in `restory` can either set a new value or replace an existing value.  
-`restory <cmd> [optional-subject-to-replace] <value>`  
-see more details for each command [below](#commands)  
-| Command | Alias | Description |
-|----------|-------|-------------------------------------------------------------------------------------------------------|
-| `list` | `ls` | list all commits |
-| `redate` | `rd` | rewrite commit(s) date |
-| `reauthor`| `ra` | rewrite commit(s) author name |
-| `remail` | `re` | rewrite commit(s) author email |
-| `remsg` | `rm` | rewrite commit(s) message |
-| `rewrite`| `rw` | rewrite multiple commit fields. This command is a combination of all of the commands above, and is controlled with flags |
-
-# options
-
-| Option            | Alias | Description                                                                                                                                                 | Default         |
-| ----------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `sha`             | `s`   | rewrite a specific commit sha.                                                                                                                              |                 |
-| `quiet`           | `q`   | don't log every commit change.                                                                                                                              | `false`         |
-| `safe`            | `S`   | remove origin when done rewriting.                                                                                                                          | `false`         |
-| `range`           | `r`   | range of commits to operate on.                                                                                                                             |                 |
-| `ellipsis`        | `e`   | truncate output to minimum width.                                                                                                                           | `true`          |
-| `logo`            | `l`   | print logo.                                                                                                                                                 | `true`          |
-| `number`          | `n`   | number of commits.                                                                                                                                          | 0 (all commits) |
-| `committer`       | `c`   | include committer fields. For example: `author_date` will also include `committer_date` in the rewrite.                                                     | `true`          |
-| `git-filter-repo` | `g`   | use [`git filter-repo`](https://github.com/newren/git-filter-repo) instead of `git filter-branch`. This method is extremely fast compared to filter-branch. | `true`          |
+- you need `git` and `python3` (set `RESTORY_PYTHON` to use another interpreter).
+- the working tree must be clean before a rewrite.
+- **`origin` is removed after a rewrite by default**, since the new history no longer matches it. restory prints the url and the commands to reconnect and force push. pass `--keep-origin` (`-k`) to keep it.
+- without a selection flag (`-s`, `-n`, `-r`, `-g`), a command applies to **every** commit reachable from `HEAD`.
+- a backup bundle is written to `.git/restory/backups` before every rewrite. pass `--no-backup` to skip it.
 
 # commands
 
-## `ls`
+| command                                         | alias | description                             |
+| ----------------------------------------------- | ----- | --------------------------------------- |
+| `list`                                          | `ls`  | list commits                            |
+| `grep <pattern>`                                |       | search every commit field with a regex  |
+| `set <field> <value> [...]`                     |       | set fields to a new value               |
+| `replace <field> <pattern> <replacement> [...]` | `sub` | replace regex matches inside fields     |
+| `shift back\|forward <amount>`                  |       | move commit dates back or forward       |
+| `undo [id]`                                     |       | restore the backup from before a rewrite |
 
-list all commits
+## fields
+
+| field                                               | meaning                                        |
+| --------------------------------------------------- | ---------------------------------------------- |
+| `message` (`msg`)                                   | the full commit message                        |
+| `name`                                              | `author.name` and `committer.name`             |
+| `email`                                             | `author.email` and `committer.email`           |
+| `date`                                              | `author.date` and `committer.date`             |
+| `author.name` `author.email` `author.date`          | the author only                                |
+| `committer.name` `committer.email` `committer.date` | the committer only                             |
+| `sha`, `author`, `committer`                        | `grep` / `--in` only                           |
+
+dates are shown and matched as ISO 8601 with their offset (`2021-01-23T10:00:00+02:00`).
+a new date can be any format javascript parses (`2024-01-01`, `2024-01-01 10:00`, `2024-01-01T10:00:00+02:00`), `now`, or `@<epoch>`.
+
+# options
+
+## selection
+
+| option            | alias | description                                          |
+| ----------------- | ----- | ---------------------------------------------------- |
+| `--sha`           | `-s`  | only these commits (one or more)                     |
+| `--number`        | `-n`  | only the last N commits                              |
+| `--range`         | `-r`  | only a range, `<from> <to>` or `"from..to"`          |
+| `--all`           | `-a`  | walk every branch and tag, not just `HEAD`           |
+| `--grep`          | `-g`  | only commits matching a pattern                      |
+| `--in`            |       | fields the pattern searches (default: all)           |
+| `--ignore-case`   | `-i`  | case-insensitive patterns                            |
+| `--fixed-strings` | `-F`  | patterns are plain text, not regular expressions     |
+
+## rewrite
+
+| option          | alias | description                                | default |
+| --------------- | ----- | ------------------------------------------ | ------- |
+| `--dry-run`     | `-d`  | show what would change, rewrite nothing    | `false` |
+| `--keep-origin` | `-k`  | keep the `origin` remote after rewriting   | `false` |
+| `--backup`      |       | save a backup for `restory undo`           | `true`  |
+| `--quiet`       | `-q`  | only print the summary                     | `false` |
+
+## output
+
+| option       | alias | description                  | default          |
+| ------------ | ----- | ---------------------------- | ---------------- |
+| `--json`     |       | print machine-readable JSON  | `false`          |
+| `--logo`     | `-l`  | print the logo               | `true` in a tty  |
+| `--ellipsis` | `-e`  | truncate `ls` columns        | `true`           |
+
+# usage
+
+## `ls`
 
 ```bash
 restory ls
+restory ls -n 5
+restory ls -r c884ca6 0b4be21
 ```
 
 <img src="./shellfies/ls.png" />
 
 [![](https://img.shields.io/static/v1?label=created%20with%20shellfie&message=📸&color=pink)](https://github.com/tool3/shellfie)
 
-list last 5 commits
+## `grep`
+
+every commit that mentions `moon` anywhere: sha, message, names, emails or dates.
+each match shows the sha, the committer and the subject. matches in other fields are listed under it.
 
 ```bash
-restory ls -n 5
+restory grep -i moon
 ```
 
-list range of commits
+only look in author emails, on every branch
 
 ```bash
-restory ls -r 'c884ca6' '0b4be21'
+restory grep '@old\.com$' --in author.email --all
 ```
 
-## `redate`
-
-rewrite all commits that has `2021` to year to `1984`
+commits dated 2021, among the last 50
 
 ```bash
-restory redate 2021 1984
+restory grep ^2021 --in date -n 50
 ```
 
-rewrites a specific commit's day
-
-```bash
-restory redate 'Jan 23' 'Jan 24' -s '0b4be21'
-```
-
-rewrites the last 5 commits date to now
-
-```bash
-restory redate "$(echo `date`)" -n 5
-```
-
-## `reauthor`
-
-rewrite all commit author names to `The Devil`
+## `set`
 
 > [!CAUTION]
 > IMPERSONATION IS STRICTLY PROHIBITED!  
 > ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!
 
-```bash
-restory reauthor 'The Devil'
-```
-
-rewrite last 5 commits author to `Jebediah Kerman`
+reword one commit
 
 ```bash
-restory reauthor 'Jebediah Kerman' -n 5
+restory set message 'fix: typo' -s 620a83b
 ```
 
-## `remail`
-
-rewrite all commit author and committer email to `thedevil@666.com`
-
-> [!CAUTION]
-> IMPERSONATION IS STRICTLY PROHIBITED!  
-> ANY IMPERSONATION WILL BE YOUR RESPONSIBILITY!
+rename the author and committer of the last 5 commits
 
 ```bash
-restory remail 'thedevil@666.com'
+restory set name 'Jebediah Kerman' -n 5
 ```
 
-## `remsg`
-
-rewrite specific commit message
+set several fields in one pass
 
 ```bash
-restory remsg 'this is the new commit msg' -s '620a83b'
+restory set name 'Jebediah Kerman' email jeb@ksp.com date '2024-01-01 10:00' -s 620a83b
 ```
 
-rewrite `Moon` to `Mun` in all commit messages
+## `replace`
+
+patterns are javascript regular expressions, replacements can use `$1` and `$&`.
 
 ```bash
-restory remsg 'Moon' 'Mun'
+restory replace message Moon Mun
+restory replace email '@old\.com$' '@new.com'
+restory replace message '^wip: ' '' -i
+restory replace message '(\d+) rockets' '$1 boosters'
+restory replace date ^2021 1984 -n 3
 ```
 
-## `rewrite`
-
-rewrite commit message and replace date year `1987` to `1988` for the last 3 commits
+several replacements in one pass
 
 ```bash
-restory rewrite -m 'this is the new commit msg' -d '1987' '1988' -n 3
+restory replace message Moon Mun name ^tal Tal
 ```
 
-rewrite `Moon` to `Mun` in all commit messages
+## `shift`
 
 ```bash
-restory rewrite -m 'Moon' 'Mun'
+restory shift back 2h -n 3
+restory shift forward 1d12h --grep 'hotfix' --in message
+restory shift back 1w --field author.date
 ```
 
-rewrite commit message, replace `t` to `z` in author name and set email to `new_value@world.com` in a range of commits
+units: `w` `d` `h` `m` `s`.
+
+## preview, then undo
 
 ```bash
-restory rewrite -m 'new message' -a 't' 'z' -e 'new_value@world.com' -r '8381e6a' '4110655'
+restory replace message Moon Mun --dry-run
+restory replace message Moon Mun
+restory undo
 ```
+
+`restory undo --list` shows the saved backups, `restory undo <id>` restores a specific one.
+
+# programmatic api
+
+```ts
+import { rewrite, grep, list, undo } from '@tool3/restory';
+
+const result = await rewrite({
+  edits: [
+    { field: 'message', replace: /moon/i, with: 'Mun' },
+    { field: 'author.name', set: 'Jebediah Kerman' },
+    { field: 'date', shift: '-2h' },
+  ],
+  select: { last: 5 },
+  keepOrigin: true,
+  dryRun: false,
+});
+
+result.changes;       // [{ sha, subject, changes: [{ field, before, after }] }]
+result.rewritten;     // { [oldSha]: newSha }
+result.removedOrigin; // { url, branch } when origin was removed
+
+const { matches } = await grep({ pattern: 'moon', ignoreCase: true, fields: ['message'] });
+const commits = await list({ select: { range: 'v1.0..HEAD' } });
+await undo();
+```
+
+set, replace and shift edits can be mixed in one `rewrite` call, and they all run in a single pass.
+
+# migrating from 2.x
+
+| 2.x                                    | 3.x                                           |
+| -------------------------------------- | --------------------------------------------- |
+| `restory remsg 'new message' -s abc`   | `restory set message 'new message' -s abc`    |
+| `restory remsg Moon Mun`               | `restory replace message Moon Mun`            |
+| `restory reauthor 'Jeb'`               | `restory set name 'Jeb'`                      |
+| `restory remail 'jeb@ksp.com'`         | `restory set email jeb@ksp.com`               |
+| `restory redate 2021 1984`             | `restory replace date 2021 1984`              |
+| `restory rewrite -m a b -a t z`        | `restory replace message a b name t z`        |
+| `--committer false`                    | use `author.*` fields                         |
+| `--safe` (never worked)                | origin is removed by default, `-k` keeps it   |
+| `--git-filter-repo false`              | removed, filter-repo is always used           |
